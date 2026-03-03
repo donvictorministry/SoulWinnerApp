@@ -1,0 +1,3930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
+    <!-- Title & Description -->
+<title>The Soul Winner's App - Six Million Souls Winning Campaign</title>
+<meta name="description" content="Soul Winner's App, built by a Soul winner for soul winning. Features include daily reflections, interactive quizzes, and a global community to inspire and mobilize believers for the Great Commission.">
+
+<!-- Open Graph Tags -->
+<meta property="og:title" content="The Soul Winner's App - What Makes This App Special?">
+<meta property="og:description" content="Unlike other Apps, Soul Winner's App is built by a Soul Winner, for Soul Winning. Every feature is designed to equip, inspire, and mobilize believers for the Great Commission. From Daily Reflections that ignite passion, to Interactive Quizzes that build Biblical knowledge, to a Global Community that shares the same burning vision - this isn't just an app, it's a movement.">
+<meta property="og:image" content="https://i.ibb.co/RpYZhKkg/Screenshot-20260302-221213.png/og-image.jpg">
+    <meta property="og:url" content="https://soulwinnerapp.donvictoracademy.net/">
+<meta property="og:type" content="website">
+
+    <!-- PWA / Manifest -->
+   <link id="manifest-placeholder" rel="manifest">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+<style>
+        :root {
+            --gold: #d4af37;
+            --deep-black: #1a1a1a;
+            --white: #ffffff;
+            --crimson: #8b0000;
+            --fb-blue: #1877f2;
+            --wa-green: #25D366;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { 
+            font-family: 'Georgia', serif;
+            background-color: var(--deep-black);
+            color: var(--white);
+            overflow: hidden;
+            height: 100vh;
+            font-size: 18px;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        body.light-mode {
+            --deep-black: #f5f5f5;
+            --white: #1a1a1a;
+            background-color: var(--deep-black);
+            color: var(--white);
+        }
+        
+        /* LOADING SCREEN */
+        #loadingScreen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--crimson), var(--deep-black), var(--gold));
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+        #loadingScreen.hidden { display: none; }
+        .loader-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--gold);
+            object-fit: cover;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .loader-mission {
+            max-width: 600px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* HEADER FIXED */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 70px;
+            background: linear-gradient(135deg, var(--crimson), var(--deep-black));
+            border-bottom: 3px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 100;
+        }
+        .header-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+        }
+        header h1 { 
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: pulsate 3s ease-in-out infinite;
+        }
+        @keyframes pulsate {
+            0%, 100% { transform: translateX(-50%) translateX(0); }
+            25% { transform: translateX(-50%) translateX(-8px); }
+            75% { transform: translateX(-50%) translateX(8px); }
+        }
+        #themeToggle { 
+            background: none;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 1rem;
+            touch-action: manipulation;
+        }
+        #themeToggle:active { transform: scale(0.95); }
+        #themeToggle:hover { background: var(--gold); color: black; }
+        
+        /* SCROLLABLE CONTENT */
+        #contentZone {
+            position: fixed;
+            top: 70px; left: 0; right: 0;
+            bottom: 80px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* SLIDESHOW */
+        .hero-slideshow {
+            height: 45vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .slide {
+            position: absolute;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            background-size: cover;
+            background-position: center;
+            transform: translateX(100%);
+            transition: transform 0.40s ease-in-out;
+        }
+        .slide.active { transform: translateX(0); }
+        .slide.prev { transform: translateX(-100%); }
+        .slide h2 { font-size: 2.5rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+        .slide p { font-style: italic; color: var(--gold); font-size: 1.4rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+        
+        /* DAILY REFLECTION */
+        .reflection-container {
+            background:  #e0e0e0;
+            padding: 30px;
+            margin: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+        }
+        body.light-mode .reflection-container { background: #e0e0e0; }
+        .reflection-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .reflection-bible {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .reflection-author {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        .reflection-message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 20px 0;
+            border-top: 2px solid #333;
+        }
+        .star {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+        .star:active { transform: scale(0.9); }
+        .star svg {
+            width: 100%;
+            height: 100%;
+        }
+        .star.empty svg {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 2;
+        }
+        .star.filled svg {
+            fill: var(--gold);
+            stroke: var(--gold);
+            stroke-width: 2;
+        }
+        
+        /* PAGES */
+        .page { display: none; padding: 25px; }
+        .page.active { display: block; }
+        .section-card {
+            background: #222;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        body.light-mode .section-card { background: #e0e0e0; }
+        .section-card h2 { font-size: 1.8rem; margin-bottom: 15px; }
+        .section-card h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--gold); }
+        
+        /* TEAM SECTION */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .team-member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 15px;
+        }
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            object-fit: cover;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .team-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--gold);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .contact-btn {
+            padding: 25px;
+            text-align: center;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+            touch-action: manipulation;
+        }
+        .contact-btn:active { transform: scale(0.95); }
+        .contact-btn:hover { transform: scale(1.05); }
+        .contact-btn i { font-size: 2.5rem; }
+        .contact-btn.email { background: var(--crimson); }
+        .contact-btn.whatsapp { background: var(--wa-green); }
+        .contact-btn.facebook { background: var(--fb-blue); }
+        .contact-btn.phone { background: #333; }
+        
+        .mission-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 1.1rem;
+        }
+        .mission-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+        .mission-list li:before {
+            content: "";
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d4af37"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>');
+            background-size: contain;
+            vertical-align: middle;
+        }
+        
+        /* QUIZ */
+        .quiz-container {
+            background: #222;
+            padding: 30px;
+            border-radius: 10px;
+            border: 3px solid var(--gold);
+        }
+        body.light-mode .quiz-container { background: #e0e0e0; }
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+        .timer {
+            background: var(--gold);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-weight: bold;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .option {
+            background: #333;
+            padding: 20px;
+            border: 2px solid #555;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            touch-action: manipulation;
+        }
+        body.light-mode .option { background: #d0d0d0; border-color: #999; }
+        .option:active { transform: scale(0.98); }
+        .option:hover { border-color: var(--gold); }
+        .option.correct { background: #2d5016; border-color: #4caf50; }
+        .option.wrong { background: #5c1a1a; border-color: #f44336; }
+        .verse {
+            margin-top: 20px;
+            padding: 20px;
+            background: #1a1a1a;
+            border-left: 4px solid var(--gold);
+            font-style: italic;
+            display: none;
+            font-size: 1.1rem;
+        }
+        body.light-mode .verse { background: #f0f0f0; }
+        .quiz-result {
+            text-align: center;
+            padding: 30px;
+        }
+        .quiz-result h2 { font-size: 2rem; margin-bottom: 20px; }
+        .award {
+            font-size: 4rem;
+            margin: 20px 0;
+        }
+        
+        /* CONFETTI */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            position: absolute;
+            animation: confetti-fall 3s linear forwards;
+            pointer-events: none;
+        }
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background: var(--deep-black);
+            padding: 35px;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 20px;
+        }
+        body.light-mode .modal-content { background: #f5f5f5; }
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: var(--gold);
+        }
+        .reveal-btn, .copy-btn, .share-btn {
+            background: var(--gold);
+            color: black;
+            border: none;
+            padding: 18px 30px;
+            margin-top: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 1.1rem;
+            touch-action: manipulation;
+        }
+        .reveal-btn:active, .copy-btn:active, .share-btn:active { 
+            transform: scale(0.95); 
+        }
+        .bank-details {
+            display: none;
+            background: #333;
+            padding: 25px;
+            margin-top: 25px;
+            border: 2px dashed var(--gold);
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+        body.light-mode .bank-details { background: #d0d0d0; }
+        
+        /* FOOTER - HORIZONTALLY SCROLLABLE */
+        footer {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 80px;
+            background: var(--deep-black);
+            border-top: 3px solid var(--gold);
+            z-index: 100;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        footer::-webkit-scrollbar { display: none; }
+        .nav-container {
+            display: flex;
+            min-width: 100%;
+            width: max-content;
+            height: 100%;
+        }
+        .nav-btn {
+            min-width: 72px;
+            height: 100%;
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            padding: 0 15px;
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+        .nav-btn i { font-size: 1.8rem; }
+        .nav-btn.active { color: var(--gold); }
+        .nav-btn:active { transform: scale(0.95); }
+        
+        /* FEEDBACK */
+        .feedback-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 35px 0;
+            border-top: 2px solid #333;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+        .feedback-bar i {
+            cursor: pointer;
+            font-size: 2.5rem;
+            transition: 0.3s;
+            color: #666;
+            touch-action: manipulation;
+        }
+        .feedback-bar i:active { transform: scale(0.9); }
+        .feedback-bar i:hover { color: var(--gold); transform: scale(1.2); }
+        .wa-fellowship-btn {
+            background: var(--wa-green);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: 0.3s;
+            touch-action: manipulation;
+        }
+        .wa-fellowship-btn:active { transform: scale(0.95); }
+        .wa-fellowship-btn:hover { transform: scale(1.05); }
+        
+        /* FOUNDER MODAL */
+        .founder-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        .founder-content {
+            background: var(--deep-black);
+            padding: 40px;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            margin: 20px;
+        }
+        body.light-mode .founder-content { background: #f5f5f5; }
+        .founder-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            object-fit: cover;
+            margin: 20px auto;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+        }
+        .founder-content h2 {
+            font-size: 2rem;
+            margin: 20px 0 10px;
+            color: var(--gold);
+        }
+        .founder-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        .founder-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .founder-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .founder-social a {
+            color: var(--gold);
+            font-size: 2rem;
+            transition: 0.3s;
+        }
+        .founder-social a:hover { transform: scale(1.2); }
+        
+        @media (max-width: 600px) {
+            body { font-size: 16px; }
+            header h1 { font-size: 1.1rem; }
+            .slide h2 { font-size: 1.8rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* OFFLINE INDICATOR */
+        .offline-indicator {
+            position: fixed;
+            top: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff9800;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 150;
+            display: none;
+        }
+        .offline-indicator.show { display: block; }
+   
+.reflection-container {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    border-radius: 0;
+}
+
+.hero-slideshow { margin-left: -25px; margin-right: -25px; width: calc(100% + 50px); }
+
+#contentZone .page { padding-left: 0; padding-right: 0; }
+.reflection-container { margin-left: 0; margin-right: 0; border-radius: 0; }
+
+.section-card, .quiz-container { margin-left: 0; margin-right: 0; border-radius: 0; }
+.team-photo { width: 100px; height: 100px; }
+
+.wa-fellowship-btn { background: none; color: var(--gold); padding: 0; width: 40px; height: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: none; }
+.wa-fellowship-btn i { font-size: 0.8rem; color: gold; }
+.wa-fellowship-btn span { display: block; font-size: 0.6rem; margin-top: -5px; color: var(--gold); text-transform: sentencecase; }
+.wa-fellowship-btn i { font-size: 2.2rem; }
+.wa-fellowship-btn span { font-size: 0.8rem; margin-top: -8px; }
+
+.feedback-bar i, .wa-fellowship-btn i { color: #666; }
+.feedback-bar i:hover, .wa-fellowship-btn:hover i { color: var(--gold); }
+.wa-fellowship-btn span { color: #666; }
+.wa-fellowship-btn:hover span { color: var(--gold); }
+
+.founder-content { text-align: left; max-height: 90vh; overflow-y: auto; margin: 20px; }
+.founder-modal { align-items: flex-start; padding-top: 20px; }
+.founder-content p { text-align: left; }
+
+.founder-modal { align-items: flex-start; padding: 0; }
+.founder-content { width: 100%; max-width: 100%; min-height: 100vh; margin: 0; border-radius: 0; border-left: none; border-right: none; }
+
+.founder-content { width: 100vw; margin-left: calc(-50vw + 50%); padding: 30px; }
+.founder-modal .close-modal { right: 20px; }
+
+header { height: 100px; padding: 0 25px; }
+#themeToggle svg { width: 24px; height: 24px; }
+#contentZone { top: 100px; }
+#themeToggle svg { 
+    width: 28px; 
+    height: 28px; 
+    fill: currentColor; 
+}
+
+body.light-mode .hero-slideshow h2 { color: var(--gold) !important; }
+body.light-mode .hero-slideshow p { color: white !important; }
+body.light-mode .hero-slideshow { background: inherit !important; }
+
+.loader-spinner {
+    font-size: 5rem;
+    font-weight: bold;
+    color: var(--gold);
+    animation: pulse 1s infinite;
+    border: none;
+    background: none;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes rotateGlobe {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.loader-photo, .header-logo {
+    animation: rotateGlobe 8s linear infinite;
+}
+
+.header-logo {
+    animation: rotateGlobe 8s linear infinite;
+}
+.loader-photo {
+    animation: pulse 2s infinite; /* keep original pulse */
+}
+
+.ratings-history-container {
+    margin-top: 30px;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    border: 2px solid #333;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+body.light-mode .ratings-history-container {
+    background: #f0f0f0;
+    border-color: #ccc;
+}
+
+.ratings-history-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--gold);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.rating-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: #222;
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+}
+
+body.light-mode .rating-item {
+    background: #e0e0e0;
+}
+
+.rating-stars {
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+.rating-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.rating-name {
+    font-weight: bold;
+    color: var(--gold);
+    font-size: 1rem;
+}
+
+.rating-time {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 2px;
+}
+
+.ratings-history-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ratings-history-container::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px;
+}
+
+.ratings-history-container::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+}
+
+body.light-mode .ratings-history-container::-webkit-scrollbar-track {
+    background: #ddd;
+}
+
+.rating-form {
+    margin-top: 15px;
+    padding: 20px;
+    background: #222;
+    border-radius: 8px;
+    border: 2px solid #333;
+}
+
+body.light-mode .rating-form {
+    background: #e0e0e0;
+    border-color: #ccc;
+}
+
+.rating-form input,
+.rating-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #1a1a1a;
+    border: 2px solid #555;
+    border-radius: 5px;
+    color: var(--white);
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+}
+
+body.light-mode .rating-form input,
+body.light-mode .rating-form textarea {
+    background: #f5f5f5;
+    border-color: #999;
+    color: #1a1a1a;
+}
+
+.rating-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.rating-form button {
+    width: 100%;
+    padding: 15px;
+    background: var(--gold);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    touch-action: manipulation;
+}
+
+.rating-form button:active {
+    transform: scale(0.98);
+}
+
+.rating-comment {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    font-style: italic;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.char-counter {
+    text-align: right;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 5px;
+}
+
+.char-counter.warning {
+    color: #ff9800;
+}
+
+.char-counter.error {
+    color: #f44336;
+    font-weight: bold;
+}
+
+
+/* Modal System - Pure CSS */
+.modal-checkbox {
+    display: none;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal-checkbox:checked + .modal-overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 90px 30px 120px 30px;
+    background: var(--deep-black);
+    text-align: left;
+}
+
+body.light-mode .modal-content-wrapper {
+    background: #f5f5f5;
+}
+
+/* Close Button */
+.modal-close {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 1001;
+    opacity: 0.9;
+    transition: 0.3s;
+}
+
+.modal-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+.modal-close::before,
+.modal-close::after {
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 4px;
+    background: var(--gold);
+    top: 50%;
+    left: 50%;
+}
+
+.modal-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.modal-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Founder Modal Content */
+.founder-modal-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid var(--gold);
+    object-fit: cover;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.5);
+}
+
+.founder-modal-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.founder-modal-title {
+    font-size: 1.4rem;
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
+
+.founder-modal-bio {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+.founder-modal-highlight {
+    background: #2a2a2a;
+    padding: 25px;
+    border-left: 5px solid var(--gold);
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+body.light-mode .founder-modal-highlight {
+    background: #e0e0e0;
+}
+
+.founder-modal-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+    padding: 30px 0;
+    border-top: 3px solid #333;
+    border-bottom: 3px solid #333;
+}
+
+body.light-mode .founder-modal-stats {
+    border-color: #ccc;
+}
+
+.founder-modal-stat {
+    text-align: center;
+}
+
+.founder-modal-stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.founder-modal-stat-label {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.founder-modal-social {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.founder-modal-social a {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.founder-modal-social a:hover {
+    transform: scale(1.15);
+    box-shadow: 0 5px 25px rgba(212, 175, 55, 0.7);
+}
+
+/* Team Modal Content */
+.team-modal-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    object-fit: cover;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+}
+
+.team-modal-name {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+.team-modal-role {
+    font-size: 1.3rem;
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+.team-modal-bio {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* Founder Preview Card */
+.founder-card-preview {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 3px solid var(--gold);
+    padding: 35px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+body.light-mode .founder-card-preview {
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+}
+
+.founder-preview-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    object-fit: cover;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.founder-preview-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+.founder-preview-title {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+.founder-preview-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* Team Cards */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.team-member-card {
+    background: #222;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+body.light-mode .team-member-card {
+    background: #e0e0e0;
+    border-color: #ccc;
+}
+
+.team-member-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+
+.team-member-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    object-fit: cover;
+    margin: 0 auto 15px;
+}
+
+.team-member-name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+.team-member-role {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 15px;
+}
+
+.read-more-label {
+    display: inline-block;
+    background: var(--gold);
+    color: black;
+    padding: 12px 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.3s;
+    touch-action: manipulation;
+}
+
+.read-more-label:hover {
+    background: #e6c145;
+    transform: scale(1.05);
+}
+
+.read-more-label:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+    .modal-content-wrapper {
+        padding: 80px 20px 100px 20px;
+    }
+    
+    .founder-modal-name {
+        font-size: 2rem;
+    }
+    
+    .founder-modal-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+summary {
+    background: #D4AF37;
+    color: #000000;
+    font: bold 1.1rem / 1.9 Arial;
+    cursor: pointer;
+    padding: 10px 25px;
+    outline: none;
+    display: table;
+}
+
+summary:hover {
+    background: #B8860B;
+}
+
+details {
+    font: 1.1rem / 1.9 Arial;
+    margin: 0 0 25px 0;
+}
+
+.moonIcon {
+    display: none !important;
+}
+
+.sunIcon {
+    display: block !important;
+}
+
+body.light-mode .sunIcon {
+    display: none !important;
+}
+
+body.light-mode .moonIcon {
+    display: block !important;
+}
+
+/* =================================================== */
+/* EMERGENCY FIX: KILL HORIZONTAL SCROLL & SWELL DOWN  */
+/* =================================================== */
+
+.rating-item {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    flex-wrap: wrap !important; /* Allows contents to push down */
+}
+
+.rating-comment {
+    width: 100% !important;
+    max-width: 100% !important;
+    
+    /* THE BONE-BREAKERS: Forces text to swell vertically */
+    overflow-wrap: break-word !important; 
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: pre-wrap !important; 
+}
+
+/* =================================================== */
+/* FINAL DEPLOYMENT: FULL-BLEED EDGE-TO-EDGE LAYOUT    */
+/* =================================================== */
+
+/* 1. Strip the parent container's left/right cushion */
+.ratings-history-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important; /* Squares the master corners flush to the glass */
+}
+
+/* 2. Stretch the review cards to touch the absolute edges */
+.rating-item {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 0 !important; /* Squares the card corners flush to the glass */
+    border-left: 4px solid var(--gold) !important;
+    border-right: none !important;
+    border-bottom: 1px solid #333 !important; /* Adds a clean divider line between reviews instead */
+}
+ </style>
+</head>
+<body>
+
+<style>
+ /* 1. Ticker: Positioned below header */
+  #sys-ticker {
+    position: fixed; 
+    top: 90px; /* Adjust if header is taller */
+    left: 0; 
+    width: 100%; 
+    height: auto; /* ALLOWS VERTICAL GROWTH */
+    min-height: 60px; 
+    overflow: hidden; 
+    z-index: 999; 
+    display: none;
+    font-family: sans-serif; 
+    font-weight: bold; 
+    line-height: 1.4; /* Better spacing for multiple lines */
+    padding: 10px 0; /* Adds breathing room top and bottom */
+  }
+  
+  .ticker-item {
+    width: 100%; 
+    text-align: center; 
+    position: relative; /* Changed to Relative so it pushes the box open */
+    transform: translateX(100%); 
+    transition: transform 0.5s ease-in-out; 
+    white-space: normal; /* ALLOWS TEXT WRAPPING */
+    padding: 0 20px; /* Prevents text touching screen edges */
+  }
+  .ticker-active { transform: translateX(0); } 
+  .ticker-exit { transform: translateX(-100%); }
+
+ 
+  /* 2. Announcement Banner - RESTORED TO YOUR EXACT CODE */
+  #sys-banner {
+    position: fixed; 
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* True centering */
+    width: 80%; 
+    max-width: 500px;
+    padding: 20px 40px 20px 20px; /* Extra right padding for close button */
+    text-align: center; 
+    cursor: pointer;
+    font-family: sans-serif; 
+    z-index: 1000; 
+    display: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border-radius: 8px;
+  }
+   
+  /* Close button for banner */
+  .banner-close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    padding: 0 8px;
+    line-height: 1;
+  }
+  .banner-close:hover {
+    opacity: 1;
+  }
+
+  /* 3. Full Screen Modal */
+  #sys-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 2000; display: none;
+    justify-content: center; align-items: center; flex-direction: column;
+  }
+  #sys-modal-content {
+    background: white; padding: 40px; border-radius: 8px; max-width: 80%;
+    text-align: center; font-size: 1.5rem;
+    overflow-y: auto; max-height: 80vh;
+  }
+  #sys-close {
+    margin-top: 20px; padding: 10px 20px; background: #333; color: #fff;
+    border: none; cursor: pointer; font-size: 1rem;
+  }
+</style>
+
+<div id="sys-ticker"></div>
+
+<div id="sys-banner">
+  <button class="banner-close">×</button>
+  <div class="banner-content"></div>
+</div>
+
+<div id="sys-modal">
+  <div id="sys-modal-content"></div>
+  <button id="sys-close">Close</button>
+</div>
+<script>
+  // 🔴 REPLACE THIS WITH YOUR GAS URL
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxA2YnFTkknZOIlzHmWvh0XKEU5r9lEBXSMopOT_GXskPfaMdoujp1qBu2raIlIpnD9ew/exec';
+  
+ const uid = localStorage.getItem('site_uid') || Math.random().toString(36).substr(2, 9);
+  localStorage.setItem('site_uid', uid);
+
+  // Track Visit
+  fetch(ENDPOINT, {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify({
+      uid: uid,
+      device: /Mobi/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
+      browser: navigator.userAgent
+    })
+  });
+
+  // Fetch & Render
+  fetch(ENDPOINT + `?uid=${uid}`)
+    .then(r => r.json())
+    .then(data => {
+      if (data.banned) {
+        document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>ACCESS DENIED</h1>";
+        return;
+      }
+      if (data.tickers && data.tickers.length > 0) initTicker(data.tickers);
+      if (data.announcements && data.announcements.length > 0) initBanner(data.announcements[0]); 
+    })
+    .catch(err => console.warn("Widget Error:", err));
+
+  // --- Ticker Logic ---
+  function initTicker(items) {
+    const container = document.getElementById('sys-ticker');
+    container.style.display = 'block';
+    let index = 0;
+    
+    function showNext() {
+      container.innerHTML = ''; 
+      const item = items[index];
+      
+      const div = document.createElement('div');
+      div.className = 'ticker-item';
+      
+      // ✅ FIX: Allow Links (innerHTML)
+      div.innerHTML = item.msg; 
+      
+      div.style.backgroundColor = item.bg;
+      div.style.color = item.color;
+      
+      container.appendChild(div);
+      
+      void div.offsetWidth; 
+      div.classList.add('ticker-active');
+
+      setTimeout(() => {
+        div.classList.remove('ticker-active');
+        div.classList.add('ticker-exit');
+        
+        index = (index + 1) % items.length;
+        setTimeout(showNext, 500); 
+      }, item.speed || 4000);
+    }
+    showNext();
+  }
+
+  // --- Banner Logic ---
+  function initBanner(data) {
+    const banner = document.getElementById('sys-banner');
+    const contentDiv = banner.querySelector('.banner-content');
+    const closeBtn = banner.querySelector('.banner-close');
+    const modal = document.getElementById('sys-modal');
+    const modalContent = document.getElementById('sys-modal-content');
+    const modalClose = document.getElementById('sys-close');
+
+    // ✅ FIX: Allow Links in Banner (innerHTML)
+    contentDiv.innerHTML = data.msg;
+    
+    banner.style.backgroundColor = data.bg;
+    banner.style.color = data.color;
+    banner.style.display = 'block';
+
+    closeBtn.onclick = (e) => {
+      e.stopPropagation(); 
+      banner.style.display = 'none';
+    };
+
+    // Open Modal logic
+    banner.onclick = (e) => {
+        // Prevent opening if the user clicked a link inside the banner
+        if (e.target.tagName === 'A') return;
+
+        // ✅ FIX: Allow Links in Modal (innerHTML)
+        modalContent.innerHTML = data.msg;
+        modalContent.style.color = "#000"; 
+        modal.style.display = 'flex';
+    };
+
+    modalClose.onclick = () => {
+      modal.style.display = 'none';
+      if(data.duration > 0) banner.style.display = 'none';
+    };
+    
+    if(data.duration > 0) {
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, data.duration * 1000); 
+    }
+  }
+</script>
+
+    <!-- LOADING SCREEN -->
+    <div id="loadingScreen">
+        <img src="https://i.ibb.co/11SX3VD/Screenshot-20260214-182147.png" alt="Ministry Logo" class="loader-photo">
+        <p class="loader-mission" id="loadingMission">No borders. No limits.
+Technology as a tool. The Gospel as life-saving power. Be part of the Six Million SoulsWinning Campaign.</p>
+        <div class="loader-spinner"></div>
+    </div>
+    
+    <!-- OFFLINE INDICATOR -->
+    <div class="offline-indicator" id="offlineIndicator">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="vertical-align: middle; margin-right: 5px;">
+            <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+        </svg>
+        You're offline - changes will sync when online
+    </div>
+    
+    <!-- HEADER -->
+    <header>
+        <img src="https://i.ibb.co/rKSxYYcc/Screenshot-20260214-190413.png/512/3426/3426653.png" alt="Logo" class="header-logo">
+        <h1 id="appTitle">THE SOUL WINNER'S APP</h1>
+        <button id="themeToggle" onclick="toggleTheme()">
+            <svg class="sunIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <svg class="moonIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+        </button>
+    </header>
+    <!-- SCROLLABLE CONTENT -->
+    <div id="contentZone">
+        <!-- HOME PAGE -->
+        <div class="page active" id="homePage">
+     <div class="hero-slideshow" id="slideshow">
+        
+<div class="slide active" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=800&q=80');">
+    <h2>PREACH THE GOSPEL</h2>
+    <p>And he said unto them, Go ye into all the world, and preach the gospel to every creature. ...Mark 16:15</p>
+</div>
+
+<div class="slide active" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80');">
+    <h2>THE HARVEST IS PLENTIFUL</h2>
+    <p>Therefore said he unto them, The harvest truly is great, but the labourers are few... ...Luke 10:2</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80');">
+    <h2>FISHERS OF MEN</h2>
+    <p>And he saith unto them, Follow me, and I will make you fishers of men. ...Matthew 4:19</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80');">
+    <h2>TO THE ENDS OF THE EARTH</h2>
+    <p>But ye shall receive power... and ye shall be witnesses unto me both in Jerusalem, and in all Judaea, and in Samaria, and unto the uttermost part of the earth. ...Acts 1:8</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80');">
+    <h2>THE WISE WIN SOULS</h2>
+    <p>The fruit of the righteous is a tree of life; and he that winneth souls is wise. ...Proverbs 11:30</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80');">
+    <h2>BEAUTIFUL FEET</h2>
+    <p>How beautiful are the feet of them that preach the gospel of peace, and bring glad tidings of good things! ...Romans 10:15</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800&q=80');">
+    <h2>SENT INTO THE WORLD</h2>
+    <p>Then said Jesus to them again, Peace be unto you: as my Father hath sent me, even so send I you. ...John 20:21</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80');">
+    <h2>LIGHT OF THE WORLD</h2>
+    <p>Ye are the light of the world. A city that is set on an hill cannot be hid. ...Matthew 5:14</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1529156069898-49953eb1f568?w=800&q=80');">
+    <h2>MINISTRY OF RECONCILIATION</h2>
+    <p>And all things are of God, who hath reconciled us to himself by Jesus Christ, and hath given to us the ministry of reconciliation. ...2 Corinthians 5:18</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1498354136128-58f790194fa7?w=800&q=80');">
+    <h2>LET YOUR LIGHT SHINE</h2>
+    <p>Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven. ...Matthew 5:16</p>
+</div>
+
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800');">
+<h2>Daily Equipping</h2>
+<p>You’re not just breathing; you’re alive in Him.</p>
+</div>
+             
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.ibb.co/VcHzLyd1/IMG-20260206-WA0003.jpg/photo-1529070538774-1843cb3265df?w=800');">
+                    <h2>CALLED TO SERVE</h2>
+<p>Thank you for being part of this vision.</p>
+                </div>
+                <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800');">
+                    <h2>THE GREAT COMMISSION</h2>
+                    <p>Go ye therefore and teach all nations,...Matthew 28:19.</p>
+                </div>
+                <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1502444330042-d1a1ddf9bb5b?w=800');">
+                    <h2>SIX MILLION SOULS ACROSS SIX CONTINENTS</h2>
+                    <p>Together, let’s shine the light of Christ across every nation.</p>
+                </div>
+                <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800');">
+<h2>DON VICTOR MINISTRIES</h2>
+<p>Equipping believers for the harvest</p>
+                </div>
+                   <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800');">
+                    <h2>FISHERS OF MEN</h2>
+<p>Follow Me, and I will make you fishers of men</p>
+</div>
+                   
+                <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1464047736614-af63643285bf?w=800');">
+          <h2>AMBASSADORS FOR CHRIST</h2>
+                    <p>Spirit-led space for:
+✔️ Sharing rich Christian content
+✔️ Inspiring one another in faith
+✔️ Building a global Kingdom movement</p>
+                </div>
+                <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1501952476817-d7ae22e8ee4e?w=800');">
+                    <h2>BEAUTIFUL FEET</h2>
+                    <p>If you are a ministry, church, school, network, or individual who believes in raising biblically grounded leaders, we want to collaborate.</p>
+                </div>
+                <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800');">
+<h2>SIX MILLION ACROSS SIX CONTINENTS</h2>
+<p>And it shall come to pass in the last days, that the mountain of the LORD's house shall be established in the top of the mountains, and shall be exalted above the hills; and all nations shall flow unto it. Isaiah 2:2.</p>
+                </div>
+                <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.imgur.com/abc123.jpg');">
+                    <h2>REVIVAL IS COMING</h2>
+                    <p>We believe the Church flourishes when ministry leaders are united, well trained, and Spirit led.</p>
+                </div>
+                <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.imgur.com/def456.jpg');">
+             <h2>REACH NATIONS FOR CHRIST</h2>
+                    <p>Then said Jesus to them again, Peace be unto you: as my Father hath sent me, even so send I you. John 20:21</p>
+                </div>
+         
+<div class="slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.ibb.co/6cfMMfFK/Screenshot-20260227-174733.png/photo-1490730141103-6cac27aaab94?w=800');">
+                    <h2>JOIN THE MOVEMENT</h2>
+                    <p>To help shape a stronger, wiser, and more faithful future for the generations ahead. For with God nothing shall be impossible. — Luke 1:37.</p>
+                </div>
+            </div>
+            
+            <!-- DAILY REFLECTION -->
+            <div class="reflection-container" id="dailyReflection">
+                <div class="reflection-title" id="reflectionTitle">Loading today's reflection...</div>
+                <div class="reflection-bible" id="reflectionBible"></div>
+                <div class="reflection-author" id="reflectionAuthor"></div>
+                <div class="reflection-message" id="reflectionMessage"></div>
+                <div class="star-rating" id="starRating">
+                    <div class="star empty" data-value="1" onclick="rateStar(1)">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="star empty" data-value="2" onclick="rateStar(2)">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="star empty" data-value="3" onclick="rateStar(3)">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="star empty" data-value="4" onclick="rateStar(4)">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="star empty" data-value="5" onclick="rateStar(5)">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                 </div>
+               </div>   
+<div class="rating-form" id="ratingForm" style="display:none;">
+    <input type="text" id="ratingName" placeholder="Your Name (required)" required>
+    <input type="email" id="ratingEmail" placeholder="Your Email (required)" required>
+    <textarea id="ratingComment" placeholder="Share your thoughts (optional, max 150 characters)" maxlength="150" oninput="updateCharCount()"></textarea>
+<div class="char-counter" id="charCounter">0/150 characters</div>
+    <button id="submitBtn" onclick="submitRating()">SUBMIT RATING</button>
+</div>
+
+<div class="ratings-history-container" id="ratingsHistoryContainer">
+    <div class="ratings-history-title">Recent Community Ratings</div>
+    <div id="ratingsHistory"></div>
+</div>
+<div class="feedback-bar">
+                <i class="fa-solid fa-thumbs-up" onclick="handleFeedback('up')"></i>
+                <i class="fa-solid fa-thumbs-down" onclick="handleFeedback('down')"></i>
+                <i class="fa-solid fa-share-nodes" onclick="shareApp()"></i>
+                <button class="wa-fellowship-btn" onclick="window.open('https://wa.me/2348086590253?text=I want to join the fellowship', '_blank')">
+                    <i class="fa-brands fa-whatsapp"></i> 
+                </button>
+            </div>
+        </div>
+        
+        <!-- ABOUT PAGE -->
+        <div class="page" id="aboutPage">
+            <div class="section-card">
+                <h2>About Don Victor Ministries</h2>
+                <p>Don Victor Ministries exists to fulfill the Great Commission by leading people to Christ and equipping believers for effective Kingdom service in alignment with Ephesians 4:12 and Matthew 28:19-20.
+
+<p class="about-modal-bio">
+<details>
+    <summary>Show More...</summary><div>
+        <p>Our Vision and Mission is clear and God-ordained: Founded by Rev. Don Victor, this ministry was born from a clear divine mandate to win six million souls for Christ across six continents. This isn't merely a numerical goal—it represents 6 million lives transformed, 6 million families restored, 6 million testimonies of God's faithfulness, and 6 million eternal destinies secured in Christ Jesus. Our foundation rests upon evangelism, discipleship, and fellowship. 
+</p>
+<p style="margin-top: 15px;">We pursue this vision with faith, wisdom, and innovation. We ensure the Gospel reaches people where they are while remaining steadfast in truth and power. Our app and digital platforms are built on prayer to enable people across nations to interact, learn, and grow regardless of distance.</p>
+</div>
+</details></p></div>
+
+<div class="founder-card-preview">
+<img src="https://i.ibb.co/84dRKY60/Screenshot-20260103-005841.png/photo-1507003211169-0a1dd7228f2d?w=400" alt="Founder" class="founder-preview-photo">
+    <h2 class="founder-preview-name">Rev. Don Victor, Ph.D</h2>
+    <p class="founder-preview-title">Founder, Visionary, Developer</p>
+    <p class="founder-preview-text">When I was building this app, every line of code was written in prayer. Every feature was shaped with your spiritual growth in mind. Every color choice, every button placement, and every word was thoughtfully considered to create a space where you can encounter God, deepen your faith, and step into your divine destiny.
+This is not just technology—it is consecrated technology. This is not just an app—it is Kingdom infrastructure. This is not just a platform—it is holy ground.
+Welcome to Don Victor Ministries Global. Together, we will win six million souls and change the world for Christ.</p>
+
+<label for="founderModal" class="read-more-label">Learn More About Founder</label>
+</div>
+ <div class="section-card">
+                <h3>Our Core Values</h3>
+                <ul class="mission-list">
+                    <li>Global Pursuit of Souls</li>
+                    <li>Spirit-led evangelism</li>
+                    <li>Digital Kingdom Innovation</li>
+                    <li>Practical training and equipping</li>
+                    <li>Uncompromised Biblical Truth</li>
+<li>Borderless Community Transformation</li>
+</ul>
+</div>   
+            
+            <div class="section-card">
+    <h3>Our Team</h3>
+    <p>Our team is composed of seasoned men and women of God with decades of combined ministry experience, united by a clear and unwavering vision to win six million souls. They are driven by a deep passion to harness technology as a strategic tool for global evangelism, reaching the unreached and advancing the gospel across nations.</p>
+     
+      <div class="team-grid">
+        <div class="team-member-card">
+            <img src="https://i.ibb.co/0RvC1sCc/Screenshot-20260214-191218.png/photo-1438761681033-6461ffad8d80?w=200" alt="Amb. David Etim" class="team-member-photo">
+            <h4 class="team-member-name">Amb. David Etim</h4>
+<p class="team-member-role">Co Founder, Director, and Senior Administrator</p>
+            <label for="teamModal1" class="read-more-label">Read More</label>
+        </div>
+        
+        <div class="team-member-card">
+            <img src="https://i.ibb.co/mFB1PT8d/Screenshot-20260214-221053.png/
+photo-1507003211169-0a1dd7228f2d?w=200" alt="Pastor Vani Aldianto" class="team-member-photo">
+            <h4 class="team-member-name">Pastor Vani Aldianto</h4>
+            <p class="team-member-role">Senior Administrator</p>
+            <label for="teamModal2" class="read-more-label">Read More</label>
+        </div>
+                
+        <div class="team-member-card">
+            <img src="https://i.ibb.co/mVcxV1vq/Screenshot-20260214-210220.png/photo-1500648767791-00dcc994a43e?w=200" alt="Mrs. Irene Sayomi " class="team-member-photo">
+            <h4 class="team-member-name">Mrs. Irene Sayomi</h4>
+            <p class="team-member-role">Administrator</p>
+            <label for="teamModal3" class="read-more-label">Read More</label>
+        </div>
+        
+        <div class="team-member-card">
+            <img src="https://i.ibb.co/jZDYsRNZ/Screenshot-20260214-191142.png/photo-1494790108377-be9c29b29330?w=200" alt="Pastor Michael Agwara, BSc" class="team-member-photo">
+<h4 class="team-member-name">Pastor Michael Agwara, BSc</h4>
+ <p class="team-member-role">Administrator</p>
+            <label for="teamModal4" class="read-more-label">Read More</label>
+        </div>       
+        <div class="team-member-card">
+            <img src="https://i.ibb.co/5XG7cCJn/Screenshot-20260214-190308.png/photo-1506794778202-cad84cf45f1d?w=200" alt="Minister Mrs. Joy Don Victor" class="team-member-photo">
+            <h4 class="team-member-name">Minister Mrs. Joy Don Victor</h4>
+            <p class="team-member-role">Director of Women Affairs
+            </p>
+            <label for="teamModal5" class="read-more-label">Read More</label>
+        </div>
+
+<div class="team-member-card">
+ <img src="https://i.ibb.co/VcVqPLSr/file-00000000e8e07243b61823c623045b61.png/photo-1506794778202-cad84cf45f1d?w=200" 
+ alt="Salvation" class="team-member-photo">
+<h4 class="team-member-name">Message</h4>
+    <p class="team-member-role"></p>
+    <label for="teamModal6" class="read-more-label">Read More</label>
+</div>
+</div>
+</div>
+   
+<div class="feedback-bar">
+<i class="fa-solid fa-thumbs-up" onclick="handleFeedback('up')"></i>
+                <i class="fa-solid fa-thumbs-down" onclick="handleFeedback('down')"></i>
+                <i class="fa-solid fa-share-nodes" onclick="shareApp()"></i>
+                <button class="wa-fellowship-btn" onclick="window.open('https://wa.me/2348086590253?text=I want to join the fellowship', '_blank')">
+                    <i class="fa-brands fa-whatsapp"></i> 
+                </button>
+            </div>
+        </div>
+        
+        <!-- CONTACT PAGE -->
+        <div class="page" id="contactPage">
+            <div class="section-card">
+                <h2>Connect With Us</h2>
+                <p>We would love to hear from you. Whether you have questions, need prayer, or want to join our mission, reach out through any of these channels.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <a href="mailto: donvictorministry@gmail.com" class="contact-btn email">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <a href="https://wa.me/2348086590253" class="contact-btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://facebook.com/Rev.DonVictor" class="contact-btn facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="tel:+2348086590253" class="contact-btn phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Call</span>
+                </a>
+            </div>
+            
+            <div class="section-card" style="margin-top: 25px;">
+<h3>Ministry Office Hours: Monday - Friday (10AM - 5PM) WAT.</h3>
+<p style="margin-top: 12px;"></p></div>
+            
+            <div class="feedback-bar">
+                <i class="fa-solid fa-thumbs-up" onclick="handleFeedback('up')"></i>
+                <i class="fa-solid fa-thumbs-down" onclick="handleFeedback('down')"></i>
+                <i class="fa-solid fa-share-nodes" onclick="shareApp()"></i>
+                <button class="wa-fellowship-btn" onclick="window.open('https://wa.me/2348086590253?text=I want to join the fellowship', '_blank')">
+                    <i class="fa-brands fa-whatsapp"></i> 
+                </button>
+            </div>
+        </div>
+        
+        <!-- SUPPORT PAGE -->
+        <div class="page" id="supportPage">
+            <div class="section-card">
+                <h2>The Eternal Harvest Partnership</h2>
+                
+<p>Your generous financial support and dedicated prayers empower us to build digital Kingdom infrastructure and advance global evangelism.</p>
+<p style="margin-top: 15px;">Every contribution is a seed sown into an eternal harvest.</p>
+            </div>
+<div class="section-card">
+                <h3>How Your Support Helps</h3>
+                <ul class="mission-list">
+                 <li>Engineer and distribute digital gospel assets</li>
+                 <li>Fund and provision tech for indigenous evangelists</li>
+                 <li>Power global outreach with live-streaming platforms</li>
+                 <li>Scale discipleship through on-demand digital resources</li>
+                 <li>Develop connectivity solutions for the unreached</li>
+                 <li>Create gospel content that scales infinitely</li>
+                 <li>Equip frontline workers with apps for teaching and connection</li>
+                 <li>Extend the reach of every event beyond physical borders</li>
+                 <li>Provide globally accessible, always-available training</li>
+                 <li>Use data and connectivity to pinpoint unreached people groups</li>
+               </ul>
+               </div>
+            
+            <button class="reveal-btn" onclick="toggleModal(true)">VIEW GIVING OPTIONS</button>
+            
+            <div class="feedback-bar">
+                <i class="fa-solid fa-thumbs-up" onclick="handleFeedback('up')"></i>
+                <i class="fa-solid fa-thumbs-down" onclick="handleFeedback('down')"></i>
+                <i class="fa-solid fa-share-nodes" onclick="shareApp()"></i>
+                <button class="wa-fellowship-btn" onclick="window.open('https://wa.me/2348086590253?text=I want to join the fellowship', '_blank')">
+                    <i class="fa-brands fa-whatsapp"></i> 
+                </button>
+            </div>
+        </div>
+        
+        <!-- MISSION PAGE -->
+        <div class="page" id="missionPage">
+            <div class="section-card">
+                <h2>The 2026 Global Harvest</h2>
+
+<p>This year represents a defining milestone for our ministry. We are activating a powerful prophetic campaign to deploy and teach nations according to Matthew 28 verses 18 and 19.</p>
+            </div>
+           <div class="section-card">
+                <h3>Strategic Goals</h3>
+                <ul class="mission-list">
+                    <li>Equip and Commission: Train 1,000 active ministry workers by the end of the year.</li>
+                    <li>Expand Our Reach: Establish 100 new training centers globally.</li>
+                    <li>Deploy Technology: Distribute 200 digital gospel tools across the nations.</li>
+                    <li>Build Fellowship: Plant 50 new soul winning communities.</li>
+                    <li>Empower Leaders: Reach 100 unreached leaders with the Gospel message.</li>
+<li>Gather the Brethren: Host 25 international conferences for spiritual awakening.</li>
+                </ul>
+            </div>
+<div class="section-card">
+<h3>Get Involved</h3>
+<p>Join us in this historic movement. Whether through prayer, financial partnership, or hands-on participation, your involvement matters.</p>
+<p style="margin-top: 15px;">The fields are white unto harvest. The laborers are few. Will you answer the call?</p>
+            </div>
+            
+            <div class="feedback-bar">
+                <i class="fa-solid fa-thumbs-up" onclick="handleFeedback('up')"></i>
+                <i class="fa-solid fa-thumbs-down" onclick="handleFeedback('down')"></i>
+                <i class="fa-solid fa-share-nodes" onclick="shareApp()"></i>
+                <button class="wa-fellowship-btn" onclick="window.open('https://wa.me/2348086590253?text=I want to join the fellowship', '_blank')">
+                    <i class="fa-brands fa-whatsapp"></i> 
+                </button>
+            </div>
+        </div>
+        
+        <!-- QUIZ PAGE -->
+        <div class="page" id="quizPage">
+            <div class="quiz-container" id="quizMain">
+                <div class="quiz-header">
+                    <span>Question <span id="qNum">1</span>/12</span>
+                    <span class="timer" id="timer">25s</span>
+                </div>
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <div class="verse" id="verse"></div>
+            </div>
+            
+            <div class="quiz-result" id="quizResult" style="display:none;">
+                <h2>Quiz Complete!</h2>
+                <div class="award" id="award"></div>
+                <p id="scoreText"></p>
+                <p style="margin-top: 25px; font-size: 1.2rem; line-height: 1.8;">
+                    We are glad you joined! We await you tomorrow. This is not a one-day show, we are on this together. Please share this link with a friend, and tell your friend to do the same.
+                </p>
+                <button class="share-btn" onclick="shareQuiz()">SHARE WITH FRIENDS</button>
+            </div>
+            
+            <div class="feedback-bar">
+                <i class="fa-solid fa-thumbs-up" onclick="handleFeedback('up')"></i>
+                <i class="fa-solid fa-thumbs-down" onclick="handleFeedback('down')"></i>
+                <i class="fa-solid fa-share-nodes" onclick="shareApp()"></i>
+                <button class="wa-fellowship-btn" onclick="window.open('https://wa.me/2348086590253?text=I want to join the fellowship', '_blank')">
+                    <i class="fa-brands fa-whatsapp"></i> 
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER - HORIZONTALLY SCROLLABLE -->
+<footer class="bottom-nav"> <div class="nav-container">
+        
+        <button class="nav-btn active" onclick="switchPage('home')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+        
+        <button class="nav-btn" onclick="switchPage('about')">
+            <i class="fa-solid fa-heart"></i>
+            <span>About</span>
+        </button>
+        
+        <button class="nav-btn" onclick="switchPage('contact')">
+            <i class="fa-solid fa-address-book"></i>
+            <span>Contact</span>
+        </button>
+        
+        <button class="nav-btn" onclick="switchPage('support')">
+<i class="fa-solid fa-hand-holding-heart"></i>
+            <span>Support</span>
+        </button>
+        
+        <button class="nav-btn" onclick="switchPage('mission')">
+            <i class="fa-solid fa-bullseye"></i>
+            <span>Mission</span>
+        </button>
+        
+        <button class="nav-btn" onclick="launchBibleMatch()">
+            <i class="fa-solid fa-puzzle-piece"></i>
+            <span>Game</span>
+        </button>
+        
+        <button class="nav-btn" onclick="switchPage('quiz')">
+            <i class="fa-solid fa-brain"></i>
+            <span>Quiz</span>
+        </button>
+        
+        <label for="founderModal" class="nav-btn" style="cursor: pointer;">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>Founder</span>
+        </label>
+
+        <button class="nav-btn" onclick="window.SoulWinnerTerms.openFromMenu()">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Terms</span>
+        </button>
+    </div>
+</footer>
+    
+    <!-- FOUNDER MODAL -->
+<input type="checkbox" id="founderModal" class="modal-checkbox">
+<label for="founderModal" class="modal-overlay">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+        <label for="founderModal" class="modal-close"></label>
+        
+        <img src="https://i.ibb.co/84dRKY60/Screenshot-20260103-005841.png/photo-1507003211169-0a1dd7228f2d?w=400" alt="Founder" class="founder-modal-photo">
+        
+        <h2 class="founder-modal-name">Rev. Don Victor, Ph.D</h2>
+        <p class="founder-modal-title">Founder and Visionary | Global Architect of Kingdom Advancement | Prolific Scholar | Technologist Bridging the Gap Between Ancient Faith and the Digital Age, building digital technologies to amplify the Great Commission.</p>
+        
+        <p class="founder-modal-bio">Rev. Don Victor stands at the rare intersection of profound theological scholarship and advanced software engineering. 
+</p> 
+<p class="founder-modal-bio">
+
+<details>
+    <summary>Show More...</summary>
+    <div>
+        <p>Early in his career, Dr. Don Victor faced the systemic challenge of intellectual property theft. Lacking the financial resources of his peers to publish in prestigious journals, he frequently lost his quality research manuscripts to unauthorized duplication. He brought this frustration before the Lord in prayer and testifies that he woke from sleep with a sudden, divinely imparted comprehension of software engineering.</p>
+
+<p>Since that turning point, Dr. Don Victor has engineered over one hundred progressive web applications, interactive games, and versatile utility tools. His notable Kingdom technologies include The DVBible, his inaugural software project. This miraculous impartation equipped him to write code, and launch a prolific era of digital innovation.</p>
+</div>
+</details></p>
+        
+        <div class="founder-modal-highlight">
+            <p class="founder-modal-bio" style="margin: 0;">With a narrative that spans from a foundational WAEC certificate to a PhD in Christian Education (CED), he embodies the "equipped" nature of a leader taught directly by God. As a "cracked vessel" filled by the Divine, he has established a global footprint through multiple online and offline platforms and ministries dedicated to demonstrating that salvation is the ultimate catalyst for academic mastery, prosperity, and societal purpose.</p>
+</div>
+    
+<p class="founder-modal-bio">
+<details>
+    <summary>Show More...</summary>
+    <div>
+       <p>Beyond his academic degrees, Rev. Don Victor has published over forty papers spanning a diverse range of studies, which have been featured across various global platforms.
+Doctoral Excellence: His dissertation, "Developing a Curriculum Framework for Fostering Civic Engagement and Political Leadership in Christian Education" earned a near-perfect score of 97 percent. This work is a pioneering integration of theology, political science, humanities, and sociology.</p>
+
+<p>Academic Versatility: In addition to his PhD, MTh, and BTh, he holds dozens of diploma certificates across a wide range of disciplines, reflecting a polymathic approach to leadership, ministry, and scholarship.</p>
+</div>
+</details></p>
+     
+<div class="founder-modal-highlight">
+            <p class="founder-modal-bio" style="margin: 0;">Founder and Visionary of Christian Educators and Ministry Leaders Certification Alliance (CEMLCA), he is orchestrating a divinely commissioned global movement to equip and certify 20,000 members across 100 nations by 2036.</p>
+</div>
+       
+<p class="founder-modal-bio">
+<details>
+    <summary>Show More...</summary>
+    <div>
+        <p>He is designing 12 specialized academies, launching through 2036, to professionalize chaplaincy, marketplace leadership, and digital discipleship. He is also knitting together a diverse global network to carry truth and healing into every sphere of society, from the pulpit to broader political arenas and industry practitioners.</p>
+
+<p>As a Global Ministry Founder overseeing online and offline platforms, he has established multiple worldwide ministries that leverage both physical presence and digital technology to facilitate deep spiritual growth and Spirit led leadership. He functions as a bridge builder, using his expertise as a web developer to modernize ministry delivery for the digital age. </p>
+</div>
+</details></p>
+
+<p class="founder-modal-bio">
+<details>
+    <summary>Show More...</summary>
+    <div>
+        <p>University Lecturer, tenure concluded at PhD convocation, he masters the art of distilling complex spiritual truths into actionable wisdom, mentoring the next generation of academic and spiritual leaders. As a professional web developer, he leverages high-level technical expertise to build the digital infrastructure necessary for a modern-day global ministry.</p>
+
+<p>This Soul Winning Application is intelligently engineered for global scalability and was built to onboard his ministry team. It features daily reflections and interactive review systems designed to accelerate global evangelism.</p>
+</div>
+</details></p>
+
+<p class="founder-modal-bio">
+
+<details>
+    <summary>Show More...</summary>
+    <div>
+        <p>As an ordained Reverend minister of Jesus Christ, researcher, and software developer, Rev. Don Victor possesses a unique capacity to scale the Gospel instantly. By building digital platforms that transcend traditional preaching, he fosters real-time, anonymous engagement. These secure spaces lower barriers, remove fear, and open hearts to spiritual truth worldwide.</p>
+
+<p>He pursues an audacious divine mandate to win six million souls across six continents. His core ministry missions include establishing secure digital platforms to win the lost and mobilize people for ministry; building a vibrant online and offline community of believers for global evangelism; and providing vital resources, counseling, and consulting to churches and Christian organizations across Africa and beyond.</p>
+</div></details></p>
+
+<p class="founder-modal-bio">
+<details>
+  <summary>Show More...</summary>
+   <div>
+<p>Personal Life and Dedication 
+</p>
+
+<p>Beyond ministry engagement and software development, Dr. Don Victor dedicates countless hours to prayer, study, and writing Christ centered resources that fuel global evangelism, church growth, and ministerial training. His vision to send the gospel to every nation and to win six million souls across six continents drives his leadership in software development, online platforms, conferences, and missionary initiatives.</p>
+
+<p>A beacon of faith and action, Reverend Don Victor's life and work embody the transformative power of the Word of God that he proclaims, calling the world to accept Jesus Christ and rise boldly in His name.</p>
+</div></details></p>       
+<div class="founder-modal-stats">
+            <div class="founder-modal-stat">
+                <span class="founder-modal-stat-number">14+</span>
+                <span class="founder-modal-stat-label">Ministries/Online platforms Founded</span>
+            </div>
+            <div class="founder-modal-stat">
+                <span class="founder-modal-stat-number">100+</span>
+                <span class="founder-modal-stat-label">Leaders Trained</span>
+            </div>
+            <div class="founder-modal-stat">
+                <span class="founder-modal-stat-number">100K+</span>
+                <span class="founder-modal-stat-label">Souls Reached</span>
+            </div>
+            <div class="founder-modal-stat">
+                <span class="founder-modal-stat-number">40+</span>
+                <span class="founder-modal-stat-label">Books Published</span>
+            </div>
+        </div>
+        
+        <div class="founder-modal-social">
+ <a href="mailto: donvictorministry@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+<a href="https://wa.me/2348086590253"><i class="fa-brands fa-whatsapp"></i></a>
+ <a href="https://facebook.com/RevDonVictor"><i class="fa-brands fa-facebook"></i></a>
+            <a href="tel:+2348086590253"><i class="fa-solid fa-phone"></i></a>
+        </div>
+    </div>
+</label>
+
+<!-- MODAL -->
+    <div id="supportModal" class="modal">
+        <span class="close-modal" onclick="toggleModal(false)">&times;</span>
+        <div class="modal-content">
+            <i class="fa-solid fa-hand-holding-heart fa-4x" style="color:var(--gold); margin-bottom: 25px;"></i>
+            <h2>Bank Transfer Details</h2>
+            <p>Support our mission through direct bank transfer</p>
+            <button class="reveal-btn" onclick="revealBank()">REVEAL BANK DETAILS</button>
+            <div id="bankInfo" class="bank-details">
+                <p><strong>BANK:</strong>PalmPay Nigeria</p>
+                <p><strong>ACCOUNT:</strong> <span id="accNum">8961346380</span></p>
+                <p><strong>NAME:</strong>Rev. Don Victor (Don Victor Ministry).</p>
+                <button class="copy-btn" onclick="copyAccount()">COPY ACCOUNT NUMBER</button>
+            </div>
+        </div>
+    </div>                
+
+<!-- TEAM MEMBER 1 MODAL -->
+<input type="checkbox" id="teamModal1" class="modal-checkbox">
+<label for="teamModal1" class="modal-overlay">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+        <label for="teamModal1" class="modal-close"></label>
+        <img src="https://i.ibb.co/0RvC1sCc/Screenshot-20260214-191218.png/photo-1438761681033-6461ffad8d80?w=200" alt="Amb. David Etim" class="team-modal-photo">
+        <h3 class="team-modal-name">Amb. David Etim</h3>
+<p class="team-modal-role">Co Founder, Director, and Senior Administrator</p>
+<p class="team-modal-bio">Amb. David Etim came to know the Lord at a very tender age, and from his youth he embraced a sincere commitment to serve God wholeheartedly. That early dedication has not faded with time. It is reflected consistently in his daily walk, his discipline, and his devotion to the work of the Kingdom. His life stands as a testimony that a promise made to God in youth can mature into a lifelong calling.</p>
+
+<p class="team-modal-bio">He is an anointed worship leader and recording artist whose gospel worship albums have reached and impacted thousands of lives across different nations. Through worship, he creates an atmosphere where hearts are drawn to God and faith is stirred. As a frequent television guest in Port Harcourt, Nigeria, he carries a strong and compelling presence in both worship and media ministry, using every available platform to exalt Christ and inspire believers.</p>
+      
+<p class="team-modal-bio"><details>
+<summary>Learn More About Co Founder...</summary><div>
+<p>In the secular sphere, he serves as a staff member with a reputable firm, bringing strategic competence to his role. He is also identified with the Merchant Navy, reflecting his strong maritime background and structured leadership culture. He is a technologist, investor, and professional instrumentalist, applying innovation and foresight to every sphere of engagement. As Co founder of Don Victor Ministries, he serves faithfully as Director and Senior Administrator. He works diligently behind the scenes to ensure that the ministry remains spiritually vibrant and structurally sound. His leadership blends worship depth, strategic coordination, and administrative precision, positioning the ministry for sustainable and expanding global impact. In close partnership with the Founder, he advances the vision with unity, integrity, and a shared pursuit of excellence.</p></div></details></p>
+ </div>
+</label>
+
+<!-- TEAM MEMBER 2 MODAL -->
+<input type="checkbox" id="teamModal2" class="modal-checkbox">
+<label for="teamModal2" class="modal-overlay">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+        <label for="teamModal2" class="modal-close"></label>
+        <img src="https://i.ibb.co/mFB1PT8d/Screenshot-20260214-221053.png/photo-1507003211169-0a1dd7228f2d?w=200" alt="Pastor Vani Aldianto" class="team-modal-photo">
+        <h3 class="team-modal-name">Pastor Vani Aldianto</h3>
+        <p class="team-modal-role">Senior Administrator</p>
+        <p class="team-modal-bio">
+Pastor Vani is a devoted, mission driven leader with a deep passion to see the gospel sent to the nations. As an ordained minister serving faithfully on the frontline, he blends spiritual authority with administrative excellence.</p>
+<p class="team-modal-bio">
+He serves as Senior Administrator of Don Victor Ministries, providing strategic oversight and coordinating the administrative structure of the online community. He works hand in hand with the visionary to sustain momentum and strengthen global impact.
+        </p>
+    </div>
+</label>
+
+<!-- TEAM MEMBER 3 MODAL -->
+<input type="checkbox" id="teamModal3" class="modal-checkbox">
+<label for="teamModal3" class="modal-overlay">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+        <label for="teamModal3" class="modal-close"></label>
+        <img src="https://i.ibb.co/mVcxV1vq/Screenshot-20260214-210220.png/photo-1500648767791-00dcc994a43e?w=200" alt="Mrs. Sayoni BSc (Eng.)
+" class="team-modal-photo">
+        <h3 class="team-modal-name">Mrs. Irene Sayomi</h3>
+<p class="team-modal-role">Administrator</p>
+<p class="team-modal-bio">Mrs. Irene Sayomi is a committed child of God and a passionate advocate for global evangelism. She carries a deep conviction that the gospel is never meant to remain silent or confined within walls, but must be proclaimed boldly across nations, cultures, and generations. Her earnest longing is to see lives transformed by the saving knowledge of Jesus Christ. She desires that men and women everywhere not only hear His name, but encounter His grace and willingly embrace Him as Lord and Savior. This burden for souls shapes her prayers, her service, and her unwavering commitment to the mission.</p>
+<p class="team-modal-bio">As an Administrator, she serves with diligence and integrity. Her loyalty is steady, her faithfulness consistent, and her support foundational. In seasons of growth and in moments of challenge, her presence has brought stability, structure, and strength to the ministry.</p>
+    </div>
+</label>
+
+<!-- TEAM MEMBER 4 MODAL -->
+<input type="checkbox" id="teamModal4" class="modal-checkbox">
+<label for="teamModal4" class="modal-overlay">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+        <label for="teamModal4" class="modal-close"></label>
+        <img src="https://i.ibb.co/jZDYsRNZ/Screenshot-20260214-191142.png/photo-1494790108377-be9c29b29330?w=200" alt="Pastor Michael Agwara, BSc" class="team-modal-photo">
+        <h3 class="team-modal-name">Pastor Michael Agwara BSc</h3>
+        <p class="team-modal-role">Evangelism and Youth Mentor</p>
+        <p class="team-modal-bio">Pastor Michael Agwara is a passionate servant of God with a deep conviction for soul winning.</p>
+        <p class="team-modal-bio">A dynamic public speaker, he addresses audiences on business, innovation, career advancement, and leadership development. He is also the Founder of De Michael Design, where creativity and enterprise converge with vision and impact. 
+
+In addition, Pastor Mike serves as an administrator of the Don Victor Ministries online community, contributing to its structure, growth, and effectiveness.
+        </p>
+    </div>
+</label>
+
+<!-- TEAM MEMBER 5 MODAL -->
+<input type="checkbox" id="teamModal5" class="modal-checkbox">
+<label for="teamModal5" class="modal-overlay">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+        <label for="teamModal5" class="modal-close"></label>
+        <img src="https://i.ibb.co/5XG7cCJn/Screenshot-20260214-190308.png/photo-1506794778202-cad84cf45f1d?w=200" alt="Minister Mrs. Joy Don Victor" class="team-modal-photo">
+        <h3 class="team-modal-name">Minister Mrs. Joy Don Victor</h3>
+        <p class="team-modal-role">Director of Women Affairs</p>
+        <p class="team-modal-bio">
+Mrs. Joy Don Victor serves as the Director of Women Affairs of the ministry, providing essential spiritual and strategic support to its visionary leadership.
+       </p>
+        <p class="team-modal-bio">
+She stands in steadfast partnership with her spouse, advancing the mandate to send the gospel to the nations. She attributes every breakthrough to ongoing support, strengthening the ministry’s foundation through prayer, wise counsel, and unwavering devotion to the shared calling.
+        </p>
+    </div>
+</label>
+   
+<!-- TEAM MEMBER 6 MODAL -->
+<input type="checkbox" id="teamModal6" class="modal-checkbox">
+<label for="teamModal6" class="modal-overlay">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+        <label for="teamModal6" class="modal-close"></label>
+  <h3 class="team-modal-name">Salvation Today</h3>
+        <p class="team-modal-role"></p>
+        <p class="team-modal-bio">
+The Bible declares in Epistle to the Romans 10:9 and 10, “If you confess with your mouth that Jesus is Lord and believe in your heart that God raised Him from the dead, you will be saved. For with the heart one believes and is justified, and with the mouth one confesses and is saved.”</p>
+        
+
+<p class="team-modal-bio">
+<details>
+    <summary>Read Full Message...</summary>
+    <div>
+        <p>Salvation is a free gift from God, available to everyone who believes. It is not about what you have done or how good you are. It is about receiving Jesus Christ as your personal Lord and Savior.</p>
+
+<p>If you are ready to give your life to Christ, pray this prayer sincerely: Lord Jesus, I acknowledge that I am a sinner and that I need Your forgiveness. I believe You died on the cross for my sins and rose again on the third day. I repent of my sins and invite You into my heart as my Lord and Savior. Fill me with Your Holy Spirit and help me live for You all the days of my life. In Jesus’ name, Amen.</p>
+</div>
+</details></p>
+     
+<p class="team-modal-bio">
+Welcome to the family of God. You are now born again and have eternal life.</p>
+
+<p class="team-modal-bio">
+Please contact us immediately so we can send you resources for your spiritual growth, connect you with other believers, and help you begin your journey with Christ.</p>
+</div>
+</label>
+<script>
+        // ============================================
+        // SITE CONFIGURATION
+        // ============================================
+        const SITE_CONFIG = {
+            appName: "THE SOUL WINNER'S APP",
+            appShortName: "SoulWinner",
+            useLocalStorage: true,
+            useIndexedDB: true,
+            apiUrl: 'https://script.google.com/macros/s/AKfycbx9zxyjvIwi2hqffB-p-OjWvyCONu7yZMQCpcfezcK2S_LK1T6tsqCCc4nwBcx20X85/exec',
+            offlineMode: true
+        };
+        
+(function() {
+    var IGNORE_MEMORY_TEST_MODE = true;
+
+    window.SoulWinnerTerms = {
+        openFromMenu: function() { buildGatekeeper(1); }
+    };
+
+    if (IGNORE_MEMORY_TEST_MODE || !localStorage.getItem('soulWinnersTermsAccepted')) {
+        setTimeout(function() {
+            buildGatekeeper(0);
+        }, 10000);
+    }
+
+    function buildGatekeeper(isFromMenu) {
+        if (document.getElementById('swEdgeToEdge')) return;
+
+        var style = document.createElement('style');
+        style.innerHTML = `
+            #swEdgeToEdge { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; margin: 0; padding: 0; background: var(--deep-black); z-index: 2147483647; display: flex; flex-direction: column; box-sizing: border-box; font-family: inherit; overflow: hidden; border: none; }
+            .sw-header { flex-shrink: 0; padding: 25px 20px; background: var(--deep-black); display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); }
+            .sw-content-area { flex: 1 1 auto; padding: 20px 20px 100px 20px; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--deep-black); }
+            
+            .sw-toggle-check { display: none; }
+            .sw-accordion-content { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.8s ease-in, opacity 0.6s ease-in; margin-top: 0; }
+            .sw-toggle-check:checked ~ .sw-accordion-content { max-height: 15000px; opacity: 1; margin-top: 10px; }
+            
+            .sw-read-more-lbl { display: inline-flex; align-items: center; justify-content: center; background: transparent; color: var(--gold); border: 2px solid var(--gold); padding: 18px 25px; font-weight: 900; border-radius: 8px; cursor: pointer; margin-top: 20px; text-transform: uppercase; font-size: 1.1rem; width: 100%; box-sizing: border-box; }
+            .sw-toggle-check:checked + .sw-read-more-lbl { display: none; }
+            
+            .sw-text { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.6; color: var(--white); }
+            .sw-title { font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; margin-top: 30px; display: flex; align-items: center; color: var(--white); }
+            .sw-icon { width: 24px; height: 24px; fill: var(--gold); margin-right: 10px; flex-shrink: 0; }
+            .sw-close-btn { background: transparent; border: none; color: var(--white); font-size: 2.5rem; cursor: pointer; line-height: 1; padding: 0; }
+            
+            .sw-footer-gate { margin-top: 40px; padding-top: 30px; border-top: 2px solid var(--gold); }
+        `;
+        document.head.appendChild(style);
+
+        var iconChevron = '<svg class="sw-icon" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>';
+        var iconList = '<svg class="sw-icon" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>';
+        var iconFile = '<svg class="sw-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>';
+        var iconWA = '<svg style="width:24px;height:24px;fill:#ffffff;margin-right:10px;" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51h-.57c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+        var iconBulb = '<svg class="sw-icon" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>';
+
+        var masterContainer = document.createElement('div');
+        masterContainer.id = "swEdgeToEdge";
+
+        var headerHTML = '<div class="sw-header">' +
+                         '<h2 style="margin:0; font-size:1.5rem; color:var(--white);">GUIDELINES & TERMS</h2>';
+        if (isFromMenu) {
+            headerHTML += '<button id="swCloseBtn" class="sw-close-btn">&times;</button>';
+        }
+        headerHTML += '</div>';
+
+        var contentArea = document.createElement('div');
+        contentArea.className = 'sw-content-area';
+
+        contentArea.innerHTML = 
+            '<h1 style="font-size:2.2rem; font-weight:bold; margin-bottom:15px; color:var(--white); line-height:1.2;">Welcome to Soul Winner’s App</h1>' +
+            '<p class="sw-text">Welcome to your digital sanctuary for worship, prayer, and discipleship. To ensure a safe and spiritually uplifting environment for our global community, please take a moment to review our app features and community guidelines.</p>' +
+            
+            '<input type="checkbox" id="gate1" class="sw-toggle-check">' +
+            '<label for="gate1" class="sw-read-more-lbl">READ MORE: APP FEATURES ' + iconChevron + '</label>' +  
+            '<div class="sw-accordion-content">' +
+             '<h2 class="sw-title">' + iconList + ' SOUL WINNER\'S APP FEATURES</h2>' +
+'<p class="sw-text"><strong>1. Daily Reflections:</strong> Fresh, spirit-filled devotionals updated daily from our servers with custom colors and themes.</p>' +
+'<p class="sw-text"><strong>2. Bible Quiz:</strong> Interactive questions and answers Bible quiz with 25-second timer, instant feedback, confetti celebrations, and progress tracking.</p>' +
+'<p class="sw-text"><strong>3. Smart Rating System:</strong> Rate your experience with anti-spam protection (2 ratings per 24hrs), email verification, and comment filtering.</p>' +
+'<p class="sw-text"><strong>4. Offline First Design:</strong> Works completely offline with auto-sync when online, and service worker caching.</p>' +
+'<p class="sw-text"><strong>5. Progressive Web App:</strong> Install on any device, works like native app, push notifications ready, home screen icon.</p>' +
+'<p class="sw-text"><strong>6. Dark/Light Mode:</strong> Beautiful themes for day and night reading with smooth transitions and preference saving.</p>' +
+'<p class="sw-text"><strong>7. Dynamic Slideshow:</strong> Auto-rotating inspirational images with smooth transitions and ministry highlights.</p>' +
+'<p class="sw-text"><strong>8. Team & Founder Profiles:</strong> Full-screen bios, stats, social links.</p>' +
+'<p class="sw-text"><strong>9. Advanced Security:</strong> 150-char limit, input sanitization.</p>' +
+'<p class="sw-text"><strong>10. 24/7 Security Monitor:</strong> Visit, logging, engagement analytics via cloud integration.</p>' +
+'<p class="sw-text"><strong>11. Auto-Sync Engine:</strong> Queues offline actions, syncs when online, never lose data.</p>' +
+'<p class="sw-text"><strong>12. Cloud Backend:</strong> Real-time data updates, easy content management.</p>' +
+'<p class="sw-text"><strong>13. Lightning Fast:</strong> Optimized code, cached assets, instant page loads, smooth scrolling.</p>' +
+
+'<p class="sw-text"><strong>14. Biblical Memory Game:</strong> A 2-minute cognitive sanctuary to sharpen your mind. Match heroes of the faith, earn spiritual ranks, and train your working memory with an auto-shuffling, beautifully engraved interface.</p>' +
+'<h3 class="sw-title" style="margin-top: 30px; font-size: 1.3rem;">What Makes This App Special?</h3>' +
+'<p class="sw-text">Unlike traditional ministry apps, Soul Winner\'s App is built by a soul winner, for soul winning. Every feature is designed to equip, inspire, and mobilize believers for the Great Commission. From daily reflections that ignite passion, to interactive quizzes that build biblical knowledge, to a global community that shares the same burning vision - this isn\'t just an app, it\'s a movement.</p>' +
+                
+                '<input type="checkbox" id="gate2" class="sw-toggle-check">' +
+                '<label for="gate2" class="sw-read-more-lbl">READ MORE: TERMS OF USE ' + iconChevron + '</label>' +
+                
+                '<div class="sw-accordion-content">' +
+                    '<h2 class="sw-title">' + iconFile + ' Terms of Use</h2>' +
+                    '<p class="sw-text"><strong>1. Access and Agreement:</strong> By accessing, downloading, installing, or using the Soul Winner’s App, you acknowledge that you have read, understood, and agreed to be bound by these Terms of Use. If you do not agree to these terms, you must discontinue use of the app immediately.</p>' +
+                    '<p class="sw-text"><strong>2. Spiritual Environment and User Conduct:</strong> This platform exists to provide a digital environment for fellowship, discipleship, and spiritual growth. All users must conduct themselves in a manner consistent with biblical values. Any conduct that is abusive, threatening, defamatory, obscene, discriminatory, unlawful, or disruptive is strictly prohibited. Users agree not to post misleading material, impersonate others, or interfere with the app\'s security. The ministry reserves sole discretion to monitor activity, remove content, and permanently terminate accounts that violate these standards without prior notice.</p>' +
+                    '<p class="sw-text"><strong>3. Intellectual Property:</strong> All content, branding, design elements, and teachings within the Soul Winner’s App remain the exclusive property of Rev. Don Victor (Don Victor Ministries) unless otherwise stated. Users are bound by this terms not to reproduce, distribute, modify, or exploit any content without prior written permission.</p>' +
+                    '<p class="sw-text"><strong>4. Technology, Connectivity, and Updates:</strong> While the app features offline capabilities, certain functions require active internet connectivity. Users are entirely responsible for any data charges imposed by their service providers. Rev. Don Victor (Don Victor Ministries) will periodically release updates to enhance security and performance; continued use constitutes acceptance of these technical modifications.</p>' +
+                    
+                    '<input type="checkbox" id="gate3" class="sw-toggle-check">' +
+                    '<label for="gate3" class="sw-read-more-lbl">READ MORE: FINAL TERMS & ACCEPTANCE ' + iconChevron + '</label>' +
+
+                    '<div class="sw-accordion-content">' +
+                        '<p class="sw-text"><strong>5. Disclaimers and Limitations of Liability:</strong> The Soul Winner’s App is intended solely for spiritual encouragement. It does not replace professional medical, psychological, financial, or legal advice. Engagement is strictly voluntary. To the fullest extent permitted by law, the ministry shall not be liable for any indirect, incidental, or consequential damages arising from the use or inability to use this platform.</p>' +
+                        '<p class="sw-text"><strong>6. Platform Support and Sustainability:</strong> To ensure global access, this app is provided completely free of charge. However, the ongoing maintenance, development, hosting, and security of the app require continuous financial support. Users who have been blessed by this app are invited to prayerfully consider supporting us through voluntary contributions. Contributions are non-refundable and do not grant ownership rights or special governance privileges.</p>' +
+                        '<p class="sw-text"><strong>7. Amendments:</strong> Rev. Don Victor (Don Victor Ministries) reserves the right to amend these terms at any time to reflect new updates or legal requirements. Continued use following published changes signifies your complete acceptance of the revised Terms of Use.</p>' +
+                        
+                        '<div class="sw-footer-gate">' +
+                            '<h2 class="sw-title">' + iconBulb + ' Want to be part of the team?</h2>' +
+                            '<p class="sw-text" style="font-weight:bold;">We welcome your feedback, feature requests, donation and partnerships to help us enhance this app and reach more souls for Christ!</p>' +
+                            '<a href="https://wa.me/2348086590253" target="_blank" style="display:flex; align-items:center; justify-content:center; background:#25D366; color:#ffffff; padding:18px; text-decoration:none; font-weight:bold; font-size:1.2rem; margin-bottom:30px; border-radius:8px;">' + iconWA + 'Contact Us</a>' +
+                            
+                            (isFromMenu ? '' : 
+                            '<label style="display:flex; align-items:flex-start; cursor:pointer; margin-bottom:20px; background:transparent;">' +
+                                '<input type="checkbox" id="swAgreeCheck" style="margin-right:15px; width:30px; height:30px; cursor:pointer; flex-shrink:0; accent-color:var(--gold);">' +
+                                '<span style="color:var(--white); font-size:1.1rem; line-height:1.4;">I have read and agree to abide by the Terms of Use and Disclaimer, and I will use this app for the purposes of the spiritual growth, sharing with family and friends and winning souls for Christ only.</span>' +
+                            '</label>' +
+                            '<button id="swProceedBtn" disabled="disabled" style="width:100%; background:#333333; color:#999999; padding:20px; border:none; font-size:1.3rem; font-weight:bold; cursor:not-allowed; transition:0.3s; border-radius:8px;">' +
+                            'PROCEED TO APP</button>' ) +
+                        '</div>' +
+
+                    '</div>' +
+                '</div>' +
+            '</div>';
+
+        masterContainer.innerHTML = headerHTML;
+        masterContainer.appendChild(contentArea);
+        document.body.appendChild(masterContainer);
+
+        if (isFromMenu) {
+            document.getElementById('swCloseBtn').addEventListener('click', function() {
+                document.body.removeChild(masterContainer);
+            });
+        } else {
+            var checkbox = document.getElementById('swAgreeCheck');
+            var proceedBtn = document.getElementById('swProceedBtn');
+
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    proceedBtn.removeAttribute('disabled');
+                    proceedBtn.style.background = 'var(--gold)';
+                    proceedBtn.style.color = 'var(--deep-black)';
+                    proceedBtn.style.cursor = 'pointer';
+                } else {
+                    proceedBtn.setAttribute('disabled', 'disabled');
+                    proceedBtn.style.background = '#333333';
+                    proceedBtn.style.color = '#999999';
+                    proceedBtn.style.cursor = 'not-allowed';
+                }
+            });
+
+            proceedBtn.addEventListener('click', function() {
+                if (checkbox.checked) {
+                    localStorage.setItem('soulWinnersTermsAccepted', '1');
+                    document.body.removeChild(masterContainer);
+                }
+            });
+        }
+    }
+})();
+
+        
+// Update app title
+document.getElementById('appTitle').textContent = SITE_CONFIG.appName;
+document.title = SITE_CONFIG.appName;
+        
+        
+        // Fetch global ratings from backend
+async function fetchGlobalRatings() {
+    if (!SITE_CONFIG.apiUrl) return;
+    
+    try {
+        const response = await fetch(SITE_CONFIG.apiUrl + '?action=get_ratings');
+        const result = await response.json();
+        
+        if (result.success && result.data) {
+            renderRatingsHistory(result.data);
+        }
+    } catch (error) {
+        console.log('Error fetching ratings:', error);
+    }
+}
+
+// Updated renderRatingsHistory to show comments
+function renderRatingsHistory(ratings) {
+    const container = document.getElementById('ratingsHistory');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (ratings.length === 0) {
+        container.innerHTML = '<p style="text-align: center; opacity: 0.6; padding: 20px;">No ratings yet. Be the first to rate!</p>';
+        return;
+    }
+    
+    ratings.forEach(rating => {
+        const ratingDiv = document.createElement('div');
+        ratingDiv.className = 'rating-item';
+        
+        const stars = '⭐'.repeat(rating.rating);
+        const relativeTime = getRelativeTime(new Date(rating.timestamp));
+        const displayName = rating.name || 'Anonymous';
+        const comment = rating.comment || '';
+        
+        ratingDiv.innerHTML = `
+            <div class="rating-name">${displayName}</div>
+            <div class="rating-time">${relativeTime}</div>
+            <div class="rating-stars">${stars}</div>
+            ${comment ? `<div class="rating-comment">${comment}</div>` : ''}
+        `;
+        
+        container.appendChild(ratingDiv);
+    });
+}
+
+// Get relative time (e.g., "2 hours ago")
+function getRelativeTime(timestamp) {
+    const now = new Date();
+    const diff = now - timestamp;
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+    
+    if (seconds < 60) return 'just now';
+    if (minutes < 60) return minutes === 1 ? '1 minute ago' : `${minutes} minutes ago`;
+    if (hours < 24) return hours === 1 ? '1 hour ago' : `${hours} hours ago`;
+    if (days < 7) return days === 1 ? '1 day ago' : `${days} days ago`;
+    if (weeks < 4) return weeks === 1 ? '1 week ago' : `${weeks} weeks ago`;
+    if (months < 12) return months === 1 ? '1 month ago' : `${months} months ago`;
+    return years === 1 ? '1 year ago' : `${years} years ago`;
+}
+      
+        // ============================================
+        // INDEXED DB SETUP FOR OFFLINE PERSISTENCE
+        // ============================================
+        let db;
+        const DB_NAME = 'SoulWinnerDB';
+        const DB_VERSION = 1;
+        
+        function initIndexedDB() {
+            if (!SITE_CONFIG.useIndexedDB) return Promise.resolve();
+            
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => {
+                    db = request.result;
+                    resolve(db);
+                };
+                
+                request.onupgradeneeded = (event) => {
+                    db = event.target.result;
+                    
+                    // Create object stores
+                    if (!db.objectStoreNames.contains('starRatings')) {
+                        db.createObjectStore('starRatings', { keyPath: 'date' });
+                    }
+                    if (!db.objectStoreNames.contains('pendingActions')) {
+                        const store = db.createObjectStore('pendingActions', { keyPath: 'id', autoIncrement: true });
+                        store.createIndex('timestamp', 'timestamp', { unique: false });
+                    }
+                    if (!db.objectStoreNames.contains('userActions')) {
+                        db.createObjectStore('userActions', { keyPath: 'id', autoIncrement: true });
+                    }
+                };
+            });
+        }
+        
+        // Save to IndexedDB
+        async function saveToIndexedDB(storeName, data) {
+            if (!db) return;
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([storeName], 'readwrite');
+                const store = transaction.objectStore(storeName);
+                const request = store.put(data);
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        // Get from IndexedDB
+        async function getFromIndexedDB(storeName, key) {
+            if (!db) return null;
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([storeName], 'readonly');
+                const store = transaction.objectStore(storeName);
+                const request = store.get(key);
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        // Get all from IndexedDB
+        async function getAllFromIndexedDB(storeName) {
+            if (!db) return [];
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([storeName], 'readonly');
+                const store = transaction.objectStore(storeName);
+                const request = store.getAll();
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        // Delete from IndexedDB
+        async function deleteFromIndexedDB(storeName, key) {
+            if (!db) return;
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([storeName], 'readwrite');
+                const store = transaction.objectStore(storeName);
+                const request = store.delete(key);
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+        
+        // ============================================
+        // OFFLINE DETECTION & SYNC
+        // ============================================
+        let isOnline = navigator.onLine;
+        
+        function updateOnlineStatus() {
+            isOnline = navigator.onLine;
+            const indicator = document.getElementById('offlineIndicator');
+            
+            if (!isOnline) {
+                indicator.classList.add('show');
+            } else {
+                indicator.classList.remove('show');
+                syncPendingActions();
+            }
+        }
+        
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        
+        // Sync pending actions when online
+        async function syncPendingActions() {
+            if (!isOnline || !db) return;
+            
+            const pending = await getAllFromIndexedDB('pendingActions');
+            
+            for (const action of pending) {
+                try {
+                    await submitToBackend(action.actionType, action.data);
+                    await deleteFromIndexedDB('pendingActions', action.id);
+                } catch (e) {
+                    console.log('Sync failed for action:', action);
+                }
+            }
+        }
+        
+        // Add action to pending queue
+        async function queueAction(actionType, data) {
+            const action = {
+                actionType,
+                data,
+                timestamp: new Date().toISOString()
+            };
+            await saveToIndexedDB('pendingActions', action);
+        }
+        
+        // ============================================
+        // DEVICE ID GENERATION (PERSISTENT)
+        // ============================================
+        function getDeviceId() {
+            let deviceId = localStorage.getItem('deviceId');
+            if (!deviceId) {
+                deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('deviceId', deviceId);
+            }
+            return deviceId;
+        }
+        
+        // ============================================
+        // STAR RATING SYSTEM
+        // ============================================
+        let currentRating = 0;
+        const today = new Date().toISOString().split('T')[0];
+        
+        // Store selected rating temporarily
+let selectedRating = 0;
+
+// Updated rateStar function - shows form instead of submitting immediately
+async function rateStar(value) {
+    selectedRating = value;
+    updateStarDisplay(value);
+    
+    // Show the rating form
+    document.getElementById('ratingForm').style.display = 'block';
+    
+    // Scroll to form
+    document.getElementById('ratingForm').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+           
+        function updateStarDisplay(rating) {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('empty');
+                    star.classList.add('filled');
+                } else {
+                    star.classList.remove('filled');
+                    star.classList.add('empty');
+                }
+            });
+        }
+        // ============================================
+        // USER ID GENERATION
+        // ============================================
+        function getUserId() {
+            let userId = localStorage.getItem('userId');
+            if (!userId) {
+                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('userId', userId);
+            }
+            return userId;
+        }
+        
+        // ============================================
+        // PWA MANIFEST
+        // ============================================
+        const manifest = {
+            "name": SITE_CONFIG.appName,
+            "short_name": SITE_CONFIG.appShortName,
+            "start_url": ".",
+            "display": "standalone",
+            "background_color": "#1a1a1a",
+            "theme_color": "#d4af37",
+            "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/3426/3426653.png", "sizes": "512x512", "type": "image/png"}]
+        };
+        const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
+        document.querySelector('#manifest-placeholder').href = URL.createObjectURL(blob);
+        
+        // ============================================
+        // SERVICE WORKER (VERSION CONTROLLED)
+        // ============================================
+        const APP_VERSION = '3'; // CHANGE THIS NUMBER EVERY TIME YOU UPDATE THE APP
+        
+        const sw = `
+        const CACHE_NAME = 'soul-winner-v${APP_VERSION}';
+
+        self.addEventListener('install', e => {
+            self.skipWaiting();
+            e.waitUntil(
+                caches.open(CACHE_NAME).then(cache => {
+                    return cache.addAll([
+                        '/?v=${APP_VERSION}', // Bypasses browser cache to get fresh code
+                        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+                    ]);
+                })
+            );
+        });
+
+        self.addEventListener('activate', e => {
+            e.waitUntil(self.clients.claim());
+            e.waitUntil(
+                caches.keys().then(cacheNames => {
+                    return Promise.all(
+                        cacheNames.map(cache => {
+                            // Destroys the old version immediately
+                            if (cache !== CACHE_NAME && cache.startsWith('soul-winner')) {
+                                return caches.delete(cache); 
+                            }
+                        })
+                    );
+                })
+            );
+        });
+
+        self.addEventListener('fetch', e => {
+            const isImage = e.request.destination === 'image' || e.request.url.match(/\.(png|jpg|jpeg|svg|webp|gif)$/i);
+
+            if (isImage) {
+                // RULE 1: IMAGES LOAD INSTANTLY FROM CACHE (No more skeletons)
+                e.respondWith(
+                    caches.match(e.request).then(cachedResponse => {
+                        if (cachedResponse) return cachedResponse;
+                        return fetch(e.request).then(networkResponse => {
+                            const clone = networkResponse.clone();
+                            caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+                            return networkResponse;
+                        }).catch(() => {});
+                    })
+                );
+            } else {
+                // RULE 2: EVERYTHING ELSE TRIES NETWORK FIRST
+                e.respondWith(
+                    fetch(e.request)
+                        .then(response => {
+                            const clone = response.clone();
+                            caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+                            return response;
+                        })
+                        .catch(() => caches.match(e.request))
+                );
+            }
+        });
+        `;
+        
+        const swBlob = new Blob([sw], {type: 'text/javascript'});
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register(URL.createObjectURL(swBlob));
+        }
+        // ============================================
+        // LOADING SCREEN
+        // ============================================
+
+  async function loadStarRating() {
+    // Always show empty stars for new users
+    currentRating = 0;
+    updateStarDisplay(0);
+}
+
+    window.addEventListener('load', async () => {
+    await initIndexedDB();
+    await loadStarRating();
+    await loadDailyReflection();
+    await fetchGlobalRatings();
+    await trackUserVisit();       
+            
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 3000);
+            
+            // Start syncing if online
+            if (isOnline) {
+                syncPendingActions();
+            }
+        });
+        
+        // ============================================
+        // SLIDESHOW
+        // ============================================
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function nextSlide() {
+            slides[slideIndex].classList.remove('active');
+            slides[slideIndex].classList.add('prev');
+            slideIndex = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add('active');
+            slides[slideIndex].classList.remove('prev');
+        }
+        
+        setInterval(nextSlide, 5000);
+        
+        // ============================================
+        // PAGE NAVIGATION
+        // ============================================
+        function switchPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(pageName + 'Page').classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            savePref('lastPage', pageName);
+            
+            if (pageName === 'quiz') {
+                startQuiz();
+            }
+        }
+        
+        // ============================================
+        // DAILY REFLECTION
+        // ============================================
+        async function loadDailyReflection() {
+  try {
+        localStorage.removeItem('sw_daily_reflection');
+        const data = await fetchBackendData('daily_reflection');
+                if (data && data.length > 0) {
+                    const reflection = data[0];
+                    document.getElementById('reflectionTitle').textContent = reflection.title || 'Today\'s Reflection';
+                    document.getElementById('reflectionTitle').style.color = reflection.titleColor || '#d4af37';
+                    document.getElementById('reflectionBible').textContent = reflection.bibleText || '';
+                    document.getElementById('reflectionBible').style.color = reflection.bibleColor || '#ffffff';
+                    document.getElementById('reflectionAuthor').textContent = reflection.writtenBy ? `— ${reflection.writtenBy}` : '';
+                    document.getElementById('reflectionAuthor').style.color = reflection.writtenByColor || '#d4af37';
+                    document.getElementById('reflectionMessage').textContent = reflection.messageText || '';
+                    document.getElementById('reflectionMessage').style.color = reflection.messageTextColor || '#ffffff';
+                    
+                    if (reflection.reflectionBgColor) {
+                        document.getElementById('dailyReflection').style.background = reflection.reflectionBgColor;
+                    }
+                }
+            } catch (e) {
+                console.log('Could not load reflection:', e);
+            }
+        }
+        
+        // ============================================
+        // QUIZ QUESTIONS
+        // ============================================
+        const quizQuestions = [
+            {
+                q: "Who said: 'How then shall they call on him in whom they have not believed? and how shall they believe in him of whom they have not heard?'",
+                options: ["Paul the Apostle", "Jesus Christ", "Peter", "John the Baptist"],
+                correct: 0,
+                verse: "Romans 10:14 - Faith comes by hearing the Word of God, making evangelism essential."
+            },
+            {
+                q: "Who declared: 'The fruit of the righteous is a tree of life; and he that winneth souls is wise'?",
+                options: ["King David", "Prophet Isaiah", "King Solomon", "Moses"],
+                correct: 2,
+                verse: "Proverbs 11:30 - Soul winning is wisdom from God, producing eternal fruit."
+            },
+            {
+                q: "Who said: 'Go ye into all the world, and preach the gospel to every creature'?",
+                options: ["Paul", "Jesus Christ", "Philip the Evangelist", "Apostle John"],
+                correct: 1,
+                verse: "Mark 16:15 - The Great Commission mandates every believer to evangelize globally."
+            },
+            {
+                q: "Who proclaimed: 'Woe is unto me, if I preach not the gospel!'?",
+                options: ["Timothy", "Barnabas", "Paul the Apostle", "Peter"],
+                correct: 2,
+                verse: "1 Corinthians 9:16 - Paul felt a divine compulsion to preach, showing evangelism as obligation."
+            },
+            {
+                q: "Who said: 'They that sow in tears shall reap in joy. He that goeth forth and weepeth, bearing precious seed, shall doubtless come again with rejoicing'?",
+                options: ["Prophet Jeremiah", "King David", "Isaiah", "Psalmist Asaph"],
+                correct: 1,
+                verse: "Psalm 126:5-6 - Soul winning requires sacrifice but promises joyful harvest."
+            },
+            {
+                q: "Who declared: 'The Spirit of the Lord is upon me, because he hath anointed me to preach the gospel to the poor'?",
+                options: ["John the Baptist", "Jesus Christ", "Prophet Elijah", "Apostle Peter"],
+                correct: 1,
+                verse: "Luke 4:18 - Jesus' primary mission was evangelism, our model for ministry."
+            },
+            {
+                q: "Who said: 'For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation'?",
+                options: ["Peter", "Paul the Apostle", "James", "John"],
+                correct: 1,
+                verse: "Romans 1:16 - The Gospel itself contains transformative power for soul winning."
+            },
+            {
+                q: "Who proclaimed: 'Let him know, that he which converteth the sinner from the error of his way shall save a soul from death'?",
+                options: ["Apostle John", "James the Just", "Peter", "Jude"],
+                correct: 1,
+                verse: "James 5:20 - Soul winning literally rescues people from eternal death."
+            },
+            {
+                q: "Who said: 'The harvest truly is plenteous, but the labourers are few; Pray ye therefore the Lord of the harvest'?",
+                options: ["Paul", "Peter", "Jesus Christ", "Philip"],
+                correct: 2,
+                verse: "Matthew 9:37-38 - Jesus emphasized the urgent need for more evangelists."
+            },
+            {
+                q: "Who declared: 'I am made all things to all men, that I might by all means save some'?",
+                options: ["Apollos", "Paul the Apostle", "Barnabas", "Timothy"],
+                correct: 1,
+                verse: "1 Corinthians 9:22 - Effective evangelism requires contextual adaptation and sacrifice."
+            },
+            {
+                q: "Who said: 'But ye shall receive power, after that the Holy Ghost is come upon you: and ye shall be witnesses unto me'?",
+                options: ["John the Apostle", "Jesus Christ", "Peter", "Paul"],
+                correct: 1,
+                verse: "Acts 1:8 - The Holy Spirit empowers believers for effective witnessing worldwide."
+            },
+            {
+                q: "Who proclaimed: 'And daily in the temple, and in every house, they ceased not to teach and preach Jesus Christ'?",
+                options: ["The Early Church", "Paul alone", "Peter alone", "The Twelve Apostles"],
+                correct: 0,
+                verse: "Acts 5:42 - The early church modeled relentless, lifestyle evangelism everywhere."
+            }
+        ];
+        
+        let currentQuiz = [];
+        let currentQ = 0;
+        let score = 0;
+        let timerInterval;
+        
+        function startQuiz() {
+            currentQuiz = [...quizQuestions].sort(() => Math.random() - 0.5);
+            currentQ = 0;
+            score = 0;
+            document.getElementById('quizMain').style.display = 'block';
+            document.getElementById('quizResult').style.display = 'none';
+            loadQuestion();
+        }
+        
+        function loadQuestion() {
+            if (currentQ >= currentQuiz.length) {
+                showResults();
+                return;
+            }
+            
+            const q = currentQuiz[currentQ];
+            document.getElementById('qNum').textContent = currentQ + 1;
+            document.getElementById('question').textContent = q.q;
+            document.getElementById('verse').style.display = 'none';
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            q.options.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = opt;
+                div.onclick = () => selectAnswer(i);
+                optionsDiv.appendChild(div);
+            });
+            
+            let timeLeft = 25;
+            document.getElementById('timer').textContent = timeLeft + 's';
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft + 's';
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    autoNext();
+                }
+            }, 1000);
+        }
+        
+        function selectAnswer(index) {
+            clearInterval(timerInterval);
+            const q = currentQuiz[currentQ];
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => opt.onclick = null);
+            
+            const element = allOptions[index];
+            if (index === q.correct) {
+                element.classList.add('correct');
+                score++;
+                createConfetti();
+            } else {
+                element.classList.add('wrong');
+                allOptions[q.correct].classList.add('correct');
+            }
+            
+            document.getElementById('verse').textContent = q.verse;
+            document.getElementById('verse').style.display = 'block';
+            
+            setTimeout(() => {
+                currentQ++;
+                loadQuestion();
+            }, 3000);
+        }
+        
+        function autoNext() {
+            currentQ++;
+            loadQuestion();
+        }
+        
+        function showResults() {
+            document.getElementById('quizMain').style.display = 'none';
+            document.getElementById('quizResult').style.display = 'block';
+            
+            const awardEmojis = ['🏆', '🎖️', '⭐', '🌟'];
+            const messages = [
+                'Soul Winner Champion!',
+                'Evangelist in Training!',
+                'Gospel Warrior!',
+                'Keep Growing!'
+            ];
+            
+            let awardIdx = score >= 10 ? 0 : score >= 7 ? 1 : score >= 5 ? 2 : 3;
+            
+            document.getElementById('award').textContent = awardEmojis[awardIdx];
+            document.getElementById('scoreText').textContent = `You scored ${score}/12 - ${messages[awardIdx]}`;
+            
+            createCelebration();
+            savePref('lastQuizScore', score);
+            savePref('lastQuizDate', new Date().toDateString());
+        }
+        
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = ['#d4af37', '#8b0000', '#ffffff'][Math.floor(Math.random() * 3)];
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+        
+        function createCelebration() {
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = ['#d4af37', '#8b0000', '#ffffff', '#25D366'][Math.floor(Math.random() * 4)];
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+        
+        function shareQuiz() {
+            const text = `I just completed an interactive Bible Quiz! Join me in learning about evangelism. Score: ${score}/12`;
+            const url = window.location.href;
+            
+            navigator.clipboard.writeText(url);
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Soul Winner Quiz',
+                    text: text,
+                    url: url
+                });
+            } else {
+                const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                const waUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+                
+                alert('Link copied to clipboard! Opening share options...');
+                window.open(fbUrl, '_blank');
+                setTimeout(() => window.open(waUrl, '_blank'), 1000);
+            }
+        }         
+        
+        // ============================================
+        // BACKEND FUNCTIONS
+        // ============================================
+        const API_URL = SITE_CONFIG.apiUrl;
+        const CACHE_TTL = 6 * 60 * 60 * 1000; // 6 hours
+        
+        function getCachedData(key) {
+            if (!SITE_CONFIG.useLocalStorage) return null;
+            try {
+                const cached = localStorage.getItem('sw_' + key);
+                if (!cached) return null;
+                const data = JSON.parse(cached);
+                if (Date.now() - data.timestamp > CACHE_TTL) {
+                    localStorage.removeItem('sw_' + key);
+                    return null;
+                }
+                return data.value;
+            } catch(e) { return null; }
+        }
+        
+        function setCachedData(key, value) {
+            if (!SITE_CONFIG.useLocalStorage) return;
+            try {
+                localStorage.setItem('sw_' + key, JSON.stringify({
+                    value: value,
+                    timestamp: Date.now()
+                }));
+            } catch(e) {}
+        }
+        
+        async function fetchBackendData(endpoint) {
+            try {
+                const cached = getCachedData(endpoint);
+                if (cached) return cached;
+                
+                const response = await fetch(API_URL + '?action=' + endpoint);
+                const data = await response.json();
+                
+                if (data.success) {
+                    setCachedData(endpoint, data.data);
+                    return data.data;
+                }
+            } catch(e) {
+                console.log('Backend error:', e);
+            }
+            return null;
+        }
+        
+        async function submitToBackend(action, data) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: action, data: data })
+                });
+                return await response.json();
+            } catch(e) {
+                console.log('Submit error:', e);
+                return { success: false };
+            }
+        }
+        
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            savePref('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+        
+        function toggleModal(show) {
+            document.getElementById('supportModal').style.display = show ? 'flex' : 'none';
+        }
+        
+        function toggleFounderModal(show) {
+            document.getElementById('founderModal').style.display = show ? 'flex' : 'none';
+        }
+        
+        function revealBank() {
+            document.getElementById('bankInfo').style.display = 'block';
+            event.target.style.display = 'none';
+        }
+        
+        function copyAccount() {
+            const num = document.getElementById('accNum').innerText;
+            navigator.clipboard.writeText(num);
+            alert('Account Number Copied!');
+        }
+        
+        function handleFeedback(type) {
+            const msg = type === 'up' ? 'Praise God!' : 'We will pray for more grace.';
+            alert(msg);
+            savePref('feedback_' + Date.now(), type);
+        }
+        
+        function shareApp() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url);
+            
+            if (navigator.share) {
+                navigator.share({title: SITE_CONFIG.appName, url: url});
+            } else {
+                const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                const waUrl = `https://wa.me/?text=${encodeURIComponent('Join the Soul Winner movement: ' + url)}`;
+                
+                alert('Link copied! Opening share options...');
+                window.open(fbUrl, '_blank');
+                setTimeout(() => window.open(waUrl, '_blank'), 1000);
+            }
+        }
+        
+        function savePref(key, val) {
+            if (!SITE_CONFIG.useLocalStorage) return;
+            try {
+                localStorage.setItem('soulwinner_' + key, JSON.stringify(val));
+            } catch(e) {
+                console.log('Storage disabled or unavailable');
+            }
+        }
+        
+        function loadPref(key) {
+            if (!SITE_CONFIG.useLocalStorage) return null;
+            try {
+                const item = localStorage.getItem('soulwinner_' + key);
+                return item ? JSON.parse(item) : null;
+            } catch(e) {
+                return null;
+            }
+        }
+        
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        window.addEventListener('DOMContentLoaded', () => {
+            const theme = loadPref('theme');
+            if (theme === 'light') document.body.classList.add('light-mode');
+            
+            const lastPage = loadPref('lastPage');
+            if (lastPage && lastPage !== 'home') {
+                setTimeout(() => {
+                    const btn = Array.from(document.querySelectorAll('.nav-btn')).find(b => 
+                        b.textContent.toLowerCase().includes(lastPage)
+                    );
+                    if (btn) btn.click();
+                }, 100);
+            }
+        });
+        
+// Character counter for comment
+ function updateCharCount() {
+    var commentBox = document.getElementById('ratingComment');
+    var comment = commentBox.value;
+    var counter = document.getElementById('charCounter');
+    var form = document.getElementById('ratingForm'); // Assumes your form has this ID
+    var btn = document.getElementById('submitBtn');
+
+    // 1. THE ZERO-TOLERANCE PENALTY (Malicious Files & Links)
+    if (containsMaliciousContent(comment)) {
+        // Vaporize the text instantly
+        commentBox.value = '';
+        
+        // Drop the shield: Hide the entire form
+        if (form) form.style.display = 'none';
+        
+        // Trigger Golden Barricade if it doesn't exist yet
+        if (!document.getElementById('penaltyCard')) {
+            var penaltyCard = document.createElement('div');
+            penaltyCard.id = 'penaltyCard';
+            penaltyCard.style.cssText = 'position: relative; background: #d4af37; color: #000000; padding: 30px 20px 20px 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-family: sans-serif; width: 100%; box-sizing: border-box; line-height: 1.6;';
+            
+            penaltyCard.innerHTML = `
+                <button id="closePenaltyCard" style="position: absolute; top: 10px; right: 15px; background: transparent; border: none; font-size: 1.8rem; color: #000000; cursor: pointer; padding: 0; line-height: 1; z-index: 10;">&times;</button>
+                <div style="font-size: 1.1rem; margin-bottom: 10px;"><strong>Security Alerts 🚫</strong></div>
+                <div style="font-size: 0.95rem; margin-bottom: 15px;">Prohibited content detected! Your input contains prohibited content and has been removed to secure the app. Please if you have ever had inspired contents to share, reach out to us securely!</div>
+                <a href="https://wa.me/2348086590253" target="_blank" style="display: inline-block; background: #25D366; color: #ffffff; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; margin-bottom: 15px; font-size: 0.95rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                    <i class="fab fa-whatsapp" style="font-size: 1.2rem; vertical-align: middle; margin-right: 5px;"></i> Contact Dev Team
+                </a>
+                <div style="font-size: 0.85rem; font-weight: bold; opacity: 0.8;">
+                    <i class="fas fa-clock"></i> Form unlocks in <span id="penaltyTimer">1:00</span>
+                </div>
+            `;
+            
+            // Drop barricade exactly where form used to be
+            if (form && form.parentNode) {
+                form.parentNode.insertBefore(penaltyCard, form);
+            }
+            
+            // 1-Minute Second Chance Countdown
+            var pTime = 60;
+            var pTimerSpan = document.getElementById('penaltyTimer');
+            var pInterval = setInterval(function() {
+                pTime--;
+                var m = Math.floor(pTime / 60);
+                var s = pTime % 60;
+                if(pTimerSpan) pTimerSpan.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+                
+                // Clock hits zero: Execute Second Chance Protocol
+                if(pTime <= 0) {
+                    liftPenalty();
+                }
+            }, 1000);
+            
+            function liftPenalty() {
+                clearInterval(pInterval);
+                if(penaltyCard && penaltyCard.parentNode) {
+                    penaltyCard.parentNode.removeChild(penaltyCard); // Destroy barricade
+                }
+                if (form) form.style.display = 'block'; // Unhide form
+                if (counter) {
+                    counter.textContent = '0/150 characters'; // Reset slate
+                    counter.classList.remove('warning', 'error');
+                }
+            }
+            
+            // Allow manual close via the X button
+            document.getElementById('closePenaltyCard').onclick = liftPenalty;
+        }
+        
+        return; // HALT FUNCTION HERE. Do not process character counts.
+    }
+
+    // 2. THE GENTLE GUILLOTINE (Normal Character Limit)
+    if (comment.length > 150) {
+        comment = comment.substring(0, 150);
+        commentBox.value = comment;
+    }
+    
+    var length = comment.length;
+    
+    // 3. STANDARD UI UPDATES
+    counter.textContent = length + '/150 characters';
+    if (length > 140) {
+        counter.classList.add('warning');
+        counter.classList.remove('error');
+    } else {
+        counter.classList.remove('warning', 'error');
+    }
+    if (length >= 150) {
+        counter.classList.add('error');
+    }
+    
+    // Form is clean, ensure button is active
+    if (btn) btn.disabled = false;
+}   
+
+// Malicious content detection
+function containsMaliciousContent(text) {
+    if (!text) return false;
+
+    var lowerText = text.toLowerCase();
+
+    // Blocked keywords
+    var blockedKeywords = [
+        'http://', 'https://', 'www.', '.com', '.net', '.org', '.io', '.co',
+        'bitcoin', 'btc', 'ethereum', 'crypto', 'cryptocurrency', 'forex',
+        'investment', 'invest now', 'make money', 'earn money', 'profit',
+        'trading', 'trader', 'wallet', 'deposit', 'withdraw',
+        'telegram', 'snapchat', 'instagram',
+        'single', 'dating', 'hookup', 'meet me', 'text me',
+        'lonely', 'relationship', 'boyfriend', 'girlfriend',
+        '</script', '<script',  '<html', '</html>', '<iframe', '<embed',
+        'javascript:', 'onclick=', 'onerror=', 'onload=',
+        'click here', 'buy now', 'limited offer', 'act now',
+        'free money', 'get rich', 'work from home', 'make $$$',
+        'discount', 'offer expires', 'claim your', 'win now',
+        '@gmail', '@yahoo', '@hotmail', '@outlook',
+        'call me', 'phone:', 'email:', 'contact:',
+        'casino', 'viagra', 'pills', 'pharmacy',
+        'loan', 'credit card', 'bank account', 'paypal',
+        '.exe', '.apk', '.bat', '.sh', '.cmd', '.vbs', '.zip', '.rar',        '.tar', '.iso', '.bin'
+    ];
+
+    // Check for blocked keywords
+    for (var i = 0; i < blockedKeywords.length; i++) {
+        if (lowerText.includes(blockedKeywords[i])) {
+            return true;
+        }
+    }
+
+    // Multiple @ symbols
+    var atCount = (text.match(/@/g) || []).length;
+    if (atCount > 1) {
+        return true;
+    }
+
+    // Phone numbers (10+ digits)
+    var digitsOnly = text.replace(/[\s\-\(\)]/g, '');
+    if (/\d{10,}/.test(digitsOnly)) {
+        return true;
+    }
+
+    // Too many capital letters
+    var capitals = (text.match(/[A-Z]/g) || []).length;
+    if (capitals > text.length * 0.5 && text.length > 10) {
+        return true;
+    }
+
+    // Excessive punctuation
+    if (/[!?]{4,}/.test(text)) {
+        return true;
+    }
+
+    // HTML/XML tags
+    if (/<[^>]*>/.test(text)) {
+        return true;
+    }
+
+    return false;
+}
+
+// Sanitize input
+function sanitizeInput(text) {
+    if (!text) return '';
+
+    // Remove HTML tags
+    text = text.replace(/<[^>]*>/g, '');
+
+    // Remove script content
+    text = text.replace(/javascript:/gi, '');
+
+    // Remove excessive whitespace
+    text = text.replace(/\s+/g, ' ').trim();
+
+    // Limit length
+    text = text.substring(0, 150);
+
+    return text;
+}
+
+// UPDATED submitRating function WITH 2 COMMENTS PER 24 HOURS LIMIT
+async function submitRating() {
+    // ========== NEW: CHECK COMMENT LIMIT (2 PER 24 HOURS) ==========
+    var commentHistory = JSON.parse(localStorage.getItem('commentHistory') || '[]');
+    var now = Date.now();
+    var oneDayAgo = now - (24 * 60 * 60 * 1000);
+    
+    // Remove old comments (older than 24 hours)
+    commentHistory = commentHistory.filter(time => time > oneDayAgo);
+    
+    // Check if user already submitted 2 comments today
+    if (commentHistory.length >= 2) {
+        alert('⏰ You can only submit 2 ratings per day. Please try again in ' + 
+              Math.ceil((commentHistory[0] - oneDayAgo) / (1000 * 60 * 60)) + ' hours.');
+        return;
+    }
+    // ========== END COMMENT LIMIT CHECK ==========
+    
+    var btn = document.getElementById('submitBtn');
+    var originalText = btn.innerHTML; // Changed to innerHTML to save your button styling
+    
+    // Add the spinning FontAwesome icon and loading state
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SUBMITTING...';
+    btn.disabled = true;
+    btn.style.opacity = '0.8';
+    btn.style.cursor = 'wait';
+    
+    var nameInput = document.getElementById('ratingName');
+    var emailInput = document.getElementById('ratingEmail');
+    var commentInput = document.getElementById('ratingComment');
+
+    if (!nameInput || !emailInput || !commentInput) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        console.error("Rating form elements not found");
+        return;
+    }
+
+    var name = nameInput.value.trim();
+    var email = emailInput.value.trim();
+    var comment = commentInput.value.trim();
+
+    // Validate required fields
+    if (!name) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Please enter your name');
+        return;
+    }
+
+    if (name.length < 2) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Name must be at least 2 characters');
+        return;
+    }
+
+    if (!email || !email.includes('@')) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    if (typeof selectedRating === 'undefined' || !selectedRating) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Please select a star rating first');
+        return;
+    }
+
+    // Sanitize inputs
+    var safeName = sanitizeInput(name);
+    var safeComment = sanitizeInput(comment);
+
+    // Check for malicious content in name
+    if (containsMaliciousContent(safeName)) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Your name contains prohibited content. Please use your real name.');
+        return;
+    }
+
+    // Check for malicious content in comment
+    if (containsMaliciousContent(safeComment)) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Prohibited content detected. Share meaningful feedback only.');
+        return;
+    }
+
+    // Validate email format
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    // Prepare data object
+    var ratingData = {
+        date: today,
+        rating: selectedRating,
+        name: safeName,
+        email: email,
+        comment: safeComment,
+        timestamp: new Date().toISOString(),
+        deviceId: getDeviceId()  // NEW: Add device ID
+    };
+
+    // Save to IndexedDB
+    if (typeof saveToIndexedDB === 'function') {
+        await saveToIndexedDB('starRatings', ratingData);
+    }
+
+    // Send to backend
+    if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.apiUrl && typeof isOnline !== 'undefined' && isOnline) {
+        try {
+            await fetch(SITE_CONFIG.apiUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'star_rating',
+                    data: {
+                        userId: (typeof getUserId === 'function') ? getUserId() : 'guest',
+                        deviceId: getDeviceId(),  // NEW: Send device ID
+                        rating: selectedRating,
+                        name: safeName,
+                        email: email,
+                        comment: safeComment
+                    }
+                })
+            });
+
+// ========== NEW: SAVE COMMENT TIMESTAMP ==========
+            commentHistory.push(now);
+            localStorage.setItem('commentHistory', JSON.stringify(commentHistory));
+            // ========== END SAVE TIMESTAMP ==========
+            // 1. BROWSER ALERT COMES FIRST
+            alert('✅ Rating submitted successfully! Thank you! 🙏');
+
+            // 2. HIDE THE FORM SO NO ONE CAN TYPE
+            var form = document.getElementById('ratingForm');
+            if (form) form.style.display = 'none'; 
+            btn.style.display = 'none';
+            
+            // 3. CREATE THE BULLETPROOF GOLDEN CARD
+            var dynamicCard = document.createElement('div');
+            dynamicCard.id = 'tempSuccessCard';
+            // Centered text, full width, with 40px top padding to safely clear the Close button
+            dynamicCard.style.cssText = 'position: relative; background: #d4af37; color: #000000; padding: 40px 20px 25px 20px; border-radius: 12px; text-align: center; margin-top: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); line-height: 1.6; font-size: 1rem; font-family: sans-serif; box-sizing: border-box; width: 100%;';
+            
+            dynamicCard.innerHTML = `
+                <button id="closeSuccessCard" style="position: absolute; top: 12px; right: 15px; background: transparent; border: none; font-size: 1.8rem; color: #000000; cursor: pointer; padding: 0; line-height: 1; z-index: 10;">&times;</button>
+                
+                <div style="font-size: 1.1rem; margin-bottom: 12px;">
+                    <strong>Your Comment and Rating Inspire Growth – Thank You 🙏
+</strong>
+                </div>
+                
+                <div>We look forward to welcoming you each day as we release life-giving reflections to enrich your walk with God. These insights are designed to cultivate clarity, conviction, and spiritual maturity.
+Come back with loved ones to reflect, interact, and contribute to the dialogue. Your rating carries influence beyond this space. It helps spread the message worldwide and motivates others to pursue God with intention. Refresh the app to see your comment and star rating appear live around the world.</div>
+                
+                <div style="margin-top: 25px; font-size: 0.9rem; font-weight: bold; opacity: 0.8;">
+                    <i class="fas fa-clock"></i> Closing in <span id="successTimer">2:00</span>
+                </div>
+            `;
+            
+            // Inject the card where the form was
+            if (form && form.parentNode) {
+                form.parentNode.insertBefore(dynamicCard, form);
+            } else {
+                btn.parentNode.insertBefore(dynamicCard, btn.nextSibling);
+            }
+
+            // 4. LIVE COUNTDOWN & CLEANUP ENGINE
+            var timeLeft = 120; // 120 seconds = 2 minutes
+            var timerSpan = document.getElementById('successTimer');
+            var closeBtn = document.getElementById('closeSuccessCard');
+
+            function cleanupCard() {
+                clearInterval(countdownInterval); // Stop the clock
+                if (dynamicCard.parentNode) {
+                    dynamicCard.parentNode.removeChild(dynamicCard); // Erase the card
+                }
+                
+                // Bring the form and button back to life
+                if (form) form.style.display = ''; 
+                btn.style.display = ''; 
+                
+                // Clear out the inputs for the next user
+                nameInput.value = '';
+                emailInput.value = '';
+                commentInput.value = '';
+                if (typeof updateCharCount === 'function') updateCharCount();
+                
+                // Restore submit button
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                btn.style.cursor = 'pointer';
+            }
+
+            closeBtn.onclick = cleanupCard;
+
+            var countdownInterval = setInterval(() => {
+                timeLeft--;
+                var minutes = Math.floor(timeLeft / 60);
+                var seconds = timeLeft % 60;
+                
+                if (timerSpan) {
+                    timerSpan.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                }
+                
+                if (timeLeft <= 0) {
+                    cleanupCard();
+                }
+            }, 1000);
+            
+                
+        } catch (e) {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            console.log('Backend sync will retry later');
+            alert('Rating saved locally! Will sync when online.');
+        }
+    } else {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Rating saved! Will sync when online.');
+    }
+}  
+
+function launchBibleMatch() {
+    if (document.getElementById('swBrainTrainer')) return;
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+        /* Main Container */
+        #swBrainTrainer { position: fixed; inset: 0; background-color: var(--deep-black); color: var(--white); z-index: 2147483647; display: flex; flex-direction: column; align-items: center; font-family: inherit; overflow: hidden; box-sizing: border-box; }
+        
+        /* Header & Timer */
+        .sw-header { width: 100%; padding: 25px 20px; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; font-size: 1.5rem; border-bottom: 2px solid var(--gold); background-color: var(--deep-black); }
+        
+        /* Close Button Theme Logic: White in Dark Mode, Gold in Light Mode */
+        .sw-close { cursor: pointer; color: #ffffff; border: none; background: transparent; font-size: 2.5rem; line-height: 1; padding: 0; margin: 0; touch-action: manipulation; transition: color 0.3s; }
+        body.light-mode .sw-close { color: var(--gold); }
+        
+        /* Timer Logic: Gold in Dark Mode, Black in Light Mode */
+        #swTime { color: var(--gold); font-size: 1.8rem; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        body.light-mode #swTime { color: var(--white); }
+        
+        /* Game Board */
+        .sw-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 20px; width: 100%; max-width: 450px; flex-grow: 1; align-content: center; }
+        .sw-card { aspect-ratio: 1; perspective: 1000px; cursor: pointer; }
+        .sw-inner { width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; position: relative; }
+        .sw-card.flipped .sw-inner { transform: rotateY(180deg); }
+        
+        /* Card Faces */
+        .sw-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        
+        /* Top Cover: Gold with Silver Cross */
+        .sw-back { background: linear-gradient(135deg, var(--gold) 0%, #d4af37 100%); border: 2px solid #b8860b; }
+        .sw-cross { color: #e0e0e0; font-size: 3.5rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+        
+        /* Inside: Silver with Purple Engraved Text */
+        .sw-front { background: linear-gradient(135deg, #f5f5f5 0%, #c0c0c0 100%); transform: rotateY(180deg); border: 2px solid #a9a9a9; }
+        .sw-engraved { 
+            color: #4a0e4e; 
+            font-family: 'Times New Roman', Times, serif; 
+            font-size: 1.2rem; 
+            font-weight: 900; 
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.9), -1px -1px 2px rgba(0,0,0,0.3); 
+        }
+
+        /* Modals (Intro & End Game) */
+        .sw-modal { position: absolute; inset: 0; background-color: var(--deep-black); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--white); transform: scale(0); transition: 0.3s ease-out; z-index: 10; padding: 20px; overflow-y: auto; }
+        .sw-modal.active { transform: scale(1); }
+        
+        /* Intro Screen Specifics */
+        #swIntroScreen { transform: scale(1); z-index: 20; justify-content: flex-start; padding-top: 40px; text-align: left; }
+        #swIntroScreen.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
+        .sw-intro-content { max-width: 600px; line-height: 1.6; font-size: 1.1rem; padding-bottom: 40px; margin: 0 auto; }
+        .sw-intro-title { font-size: 1.8rem; color: var(--gold); margin-bottom: 20px; text-align: center; font-weight: bold; }
+        
+        /* Buttons & Badges */
+        .sw-badge { font-size: 6rem; margin-bottom: 15px; color: var(--gold); }
+        .sw-btn { margin-top: 25px; background: transparent; border: 2px solid var(--gold); color: var(--gold); padding: 15px 30px; cursor: pointer; border-radius: 5px; transition: 0.3s; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; touch-action: manipulation; width: 100%; max-width: 320px; display: flex; align-items: center; justify-content: center; gap: 10px; margin-left: auto; margin-right: auto; }
+        .sw-btn:active { transform: scale(0.95); }
+        .sw-btn:hover { background-color: var(--gold); color: var(--deep-black); }
+        
+        .sw-particle { position: absolute; width: 10px; height: 10px; border-radius: 50%; z-index: 100; transition: transform 2s ease-out, top 2s ease-in; }
+    `;
+    document.head.appendChild(style);
+
+    const chars = ['JESUS', 'MOSES', 'DAVID', 'ESTHER', 'ELIJAH', 'PETER', 'PAUL', 'MARY'];
+    let deck = [], flipped = [], matched = 0, locked = false, timeLeft = 120;
+
+    const wrapper = document.createElement('div');
+    wrapper.id = 'swBrainTrainer';
+    
+    wrapper.innerHTML = `
+        <div id="swIntroScreen" class="sw-modal active">
+            <button class="sw-close" style="position: absolute; top: 20px; right: 20px;" onclick="document.getElementById('swBrainTrainer').remove(); clearTimeout(window.swIntroTimer);">&times;</button>
+            
+            <div class="sw-intro-content">
+                <div class="sw-intro-title">Why I built this Game into the Soul Winner's App</div>
+<p>Welcome, beloved. You might wonder why a memory game is included in an app dedicated to the Great Commission. I built this not as a mere distraction but as a cognitive sanctuary for the Body of Christ. In our rapidly moving digital world, our minds are under constant attack from noise, stress, and worldly distractions. Emotionally, taking a brief and wholesome pause to focus your mind helps lower daily anxiety, center your thoughts, and bring your peace back to the Kingdom.</p>
+                
+<p>Spiritually, this is a brain trainer designed to sharpen you. <h3 style="color: var(--gold); margin-top: 25px;">Hebrews 12:1 reminds us, <em>"Therefore, since we are surrounded by such a great cloud of witnesses, let us throw off everything that hinders and the sin that so easily entangles. And let us run with perseverance the race marked out for us."</em> </h3> By actively engaging your memory with the names of our biblical heroes and ultimately the powerful name of our LORD JESUS CHRIST, we are reminded of this very cloud of witnesses. Training your working memory directly enhances your everyday ability to retain Scripture, recall biblical history, and stay sharp when hearing and sharing the Gospel with others.</p>
+                <h3 style="color: var(--gold); margin-top: 25px;">How to Play</h3>
+                <p>Your challenge is simple yet sharpening. <h3 style="color: var(--gold); margin-top: 25px;">You have exactly 2 minutes (120 seconds</h3> to find all the matching pairs. Tap the gold and silver cards to reveal the engraved names beneath. Match every biblical hero before the countdown ends. To keep your mind continually challenged, the board will completely reshuffle into a new and unpredictable pattern every single time you play.</p>
+                <h3 style="color: var(--gold); margin-top: 25px;">Rewards and Time Limits</h3>
+                <p>If your timer reaches zero before you match all the names, the board will close and gently encourage you to try again so you can continue building your mental endurance.</p>
+                <p>However, if you successfully match all the cards before time expires, you will be rewarded with a spiritual rank and a badge of honor based on your speed:</p>
+                <ul style="padding-left: 20px; margin-bottom: 25px;">
+                    <li>Finish with abundant time remaining to earn the <strong>Master Scholar Crown</strong>.</li>
+                    <li>Finish with moderate time remaining to earn the <strong>Faithful Warrior Shield</strong>.</li>
+                    <li>Finish just in time to earn the <strong>Dedicated Reader Scroll</strong>.</li>
+                </ul>
+                <p>Train your mind. Remember the Word. Win souls. Happy game experience.</p>
+                
+ <h3 style="color: var(--gold); margin-top: 25px;">Rev. Don Victor, PhD</h3>
+                <button class="sw-btn" id="swStartBtn"><i class="fa-solid fa-play"></i> I Am Ready To Play</button>
+            </div>
+        </div>
+
+        <div class="sw-header">
+            <span id="swTime"><i class="fa-solid fa-stopwatch"></i> 2:00</span>
+            <button class="sw-close" onclick="document.getElementById('swBrainTrainer').remove(); clearInterval(window.swTimerId); clearTimeout(window.swIntroTimer);">&times;</button>
+        </div>
+        <div class="sw-board" id="swBoard"></div>
+        
+        <div class="sw-modal" id="swResult">
+            <div class="sw-badge" id="swBadgeIcon"></div>
+            <h1 id="swResultTitle" style="margin:0; font-size: 2.5rem; color: var(--gold);"></h1>
+            <p id="swResultText" style="font-size:1.2rem; margin-top:10px; text-align:center; padding: 0 20px;"></p>
+            <button class="sw-btn" id="swRestart"><i class="fa-solid fa-rotate-right"></i> PLAY AGAIN</button>
+            <button class="sw-btn" onclick="document.getElementById('swBrainTrainer').remove(); clearInterval(window.swTimerId);"><i class="fa-solid fa-xmark"></i> EXIT GAME</button>
+        </div>
+    `;
+    document.body.appendChild(wrapper);
+
+    const board = document.getElementById('swBoard');
+    const timeEl = document.getElementById('swTime');
+    const resModal = document.getElementById('swResult');
+    const introScreen = document.getElementById('swIntroScreen');
+    
+    // True Fisher-Yates Shuffle Algorithm
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    // Format seconds into M:SS
+    function formatTime(seconds) {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function startGame() {
+        introScreen.classList.add('hidden');
+        clearTimeout(window.swIntroTimer);
+        init();
+    }
+
+    // Intro Screen automatically vanishes after 90 seconds (1.5 minutes)
+    window.swIntroTimer = setTimeout(startGame, 90000);
+    document.getElementById('swStartBtn').onclick = startGame;
+
+    function init() {
+        board.innerHTML = ''; 
+        resModal.classList.remove('active');
+        
+        // Build and truly shuffle the deck
+        let rawDeck = [...chars, ...chars];
+        deck = shuffle(rawDeck);
+        
+        flipped = []; matched = 0; locked = false; timeLeft = 120;
+        timeEl.innerHTML = `<i class="fa-solid fa-stopwatch"></i> ${formatTime(timeLeft)}`; 
+        timeEl.style.color = ''; // Clears inline color so CSS handles Light/Dark theme correctly
+        
+        clearInterval(window.swTimerId); 
+        window.swTimerId = setInterval(tick, 1000);
+
+        deck.forEach((charName) => {
+            const card = document.createElement('div');
+            card.className = 'sw-card';
+            card.innerHTML = `
+                <div class="sw-inner">
+                    <div class="sw-back sw-face">
+                        <i class="fa-solid fa-cross sw-cross"></i>
+                    </div>
+                    <div class="sw-front sw-face">
+                        <span class="sw-engraved">${charName}</span>
+                    </div>
+                </div>`;
+            card.onclick = () => flipCard(card, charName);
+            board.appendChild(card);
+        });
+    }
+
+    function tick() {
+        timeLeft--; 
+        timeEl.innerHTML = `<i class="fa-solid fa-stopwatch"></i> ${formatTime(timeLeft)}`;
+        
+        if (timeLeft <= 10) timeEl.style.color = '#ff4444'; // Red urgency warning
+        if (timeLeft <= 0) endGame(false);
+    }
+
+    function flipCard(card, charName) {
+        if (locked || card.classList.contains('flipped') || flipped.length === 2) return;
+        card.classList.add('flipped');
+        flipped.push({ el: card, val: charName });
+        
+        if (flipped.length === 2) {
+            locked = true;
+            if (flipped[0].val === flipped[1].val) {
+                matched += 2; flipped = []; locked = false;
+                if (matched === 16) setTimeout(() => endGame(true), 500);
+            } else {
+                setTimeout(() => {
+                    flipped.forEach(c => c.el.classList.remove('flipped'));
+                    flipped = []; locked = false;
+                }, 800);
+            }
+        }
+    }
+
+    function fireConfetti() {
+        const colors = ['var(--gold)', '#c0c0c0', '#4a0e4e']; // Gold, Silver, Purple
+        for(let i=0; i<50; i++) {
+            let p = document.createElement('div');
+            p.className = 'sw-particle';
+            p.style.background = colors[i % 3];
+            p.style.left = Math.random() * 100 + 'vw'; p.style.top = '-20px';
+            wrapper.appendChild(p);
+            setTimeout(() => { p.style.top = '100vh'; p.style.transform = `rotate(${Math.random()*360}deg) scale(${Math.random() * 2})`; }, 20);
+            setTimeout(() => p.remove(), 2000);
+        }
+    }
+
+    function endGame(won) {
+        clearInterval(window.swTimerId);
+        document.getElementById('swResultTitle').innerText = won ? 'HALLELUJAH!' : 'TIME UP!';
+        
+        // Badge thresholds: >40s for Crown, >20s for Shield, else Scroll
+        let badgeIcon = won ? (timeLeft > 40 ? 'fa-crown' : (timeLeft > 20 ? 'fa-shield-halved' : 'fa-scroll')) : 'fa-hourglass-half';
+        let rank = won ? (timeLeft > 40 ? 'Master Scholar' : (timeLeft > 20 ? 'Faithful Warrior' : 'Dedicated Reader')) : 'Try Again';
+        
+        document.getElementById('swBadgeIcon').innerHTML = `<i class="fa-solid ${badgeIcon}"></i>`;
+        document.getElementById('swResultText').innerText = won ? `Rank: ${rank} (${formatTime(timeLeft)} remaining)` : 'Keep training your mind in the Word. Try again!';
+        resModal.classList.add('active');
+        if (won) fireConfetti();
+    }
+
+    document.getElementById('swRestart').onclick = init;
+}
+
+
+// Track user when app loads - ENHANCED WITH DEVICE ID
+async function trackUserVisit() {
+    if (!SITE_CONFIG.apiUrl || !isOnline) return;
+    
+    try {
+        await fetch(SITE_CONFIG.apiUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'user_action',
+                data: {
+                    userId: getUserId(),
+                    deviceId: getDeviceId(),  // NEW: Send device ID
+                    browser: navigator.userAgent,
+                    action: 'Visit'
+                }
+            })
+        });
+        console.log('✅ User tracked: ' + getUserId() + ' | Device: ' + getDeviceId());
+    } catch(e) {
+        console.log('User tracking failed:', e);
+    }
+}
+
+let style = document.createElement('style');
+style.textContent = `
+  /* 1. Force the parent container to let the line break out */
+  .loader-spinner { 
+    overflow: visible !important; 
+  }
+  
+  body { 
+    overflow-x: hidden; 
+    margin: 0; 
+  }
+
+  .line { 
+    width: 100vw; 
+    height: 8px; 
+    background: #000000; 
+    position: relative; 
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 40px; 
+  }
+  
+  .fill { 
+    height: 100%; 
+    background: #FFD700; 
+    position: absolute; 
+    top: 0;
+    animation: custom-slide 1.5s infinite ease-in-out; 
+  }
+  
+  @keyframes custom-slide {
+    0% { left: -50%; width: 30%; }
+    50% { left: 20%; width: 80%; }
+    100% { left: 100%; width: 30%; }
+  }
+`;
+document.head.appendChild(style);
+
+let splashScreen = document.querySelector('.loader-spinner');
+
+if (splashScreen) {
+    // 2. Double-tap the override directly in the DOM just in case
+    splashScreen.style.overflow = 'visible';
+    
+    // 3. Prevent duplicate lines from stacking up if you reload the script
+    let existingLine = splashScreen.querySelector('.line');
+    if (existingLine) existingLine.remove();
+
+    // 4. Inject the line
+    splashScreen.insertAdjacentHTML('beforeend', `
+      <div class="line">
+          <div class="fill"></div>
+      </div>
+    `);
+}
+
+</script>
+</body>
+</html>
