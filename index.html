@@ -16,7 +16,7 @@
 
     <!-- PWA / Manifest -->
    <link id="manifest-placeholder" rel="manifest">
-    <meta name="theme-color" content="#1a1a1a">
+    <meta name="theme-color" content="#d4af37">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
@@ -1679,6 +1679,10 @@ Technology as a tool. The Gospel as life-saving power. Be part of the Six Millio
     <div id="ratingsHistory"></div>
 </div>
 <div class="feedback-bar">
+    <button> id="pwa-isolated-install-btn" style="background:transparent; border:none; cursor:pointer; padding:0; display:flex; flex-direction:column; align-items:center; gap:2px;">
+        <i class="fa-solid fa-download" style="color: green; font-size: 1.8rem; font-weight: 900;"></i>
+        <span style="color: green; font-size: 1.1rem; font-weight: bold; text-align: center; line-height: 1;">Install<br>App</span>
+    </button>
                 <i class="fa-solid fa-thumbs-up" onclick="handleFeedback('up')"></i>
                 <i class="fa-solid fa-thumbs-down" onclick="handleFeedback('down')"></i>
                 <i class="fa-solid fa-share-nodes" onclick="shareApp()"></i>
@@ -2230,7 +2234,26 @@ Please contact us immediately so we can send you resources for your spiritual gr
             offlineMode: true
         };
         
-(function() {
+(() => {
+  let installPromptEvent;
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    installPromptEvent = event;
+  });
+
+  const installBtn = document.getElementById('pwa-isolated-install-btn');
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (!installPromptEvent) return; // Fails silently if prompt isn't ready/supported
+      installPromptEvent.prompt();
+      await installPromptEvent.userChoice;
+      installPromptEvent = null;
+    });
+  }
+})();
+    
+    (function() {
     var IGNORE_MEMORY_TEST_MODE = false;
 
     window.SoulWinnerTerms = {
@@ -2656,9 +2679,9 @@ async function rateStar(value) {
             "short_name": SITE_CONFIG.appShortName,
             "start_url": ".",
             "display": "standalone",
-            "background_color": "#1a1a1a",
+            "background_color": "#d4af37",
             "theme_color": "#d4af37",
-            "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/3426/3426653.png", "sizes": "512x512", "type": "image/png"}]
+            "icons": [{"src": "https://i.ibb.co/CKfcDRB5/Screenshot-20260302-192209.png/512/3426/3426653.png", "sizes": "512x512", "type": "image/png"}]
         };
         const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
         document.querySelector('#manifest-placeholder').href = URL.createObjectURL(blob);
@@ -2666,7 +2689,7 @@ async function rateStar(value) {
         // ============================================
         // SERVICE WORKER (VERSION CONTROLLED)
         // ============================================
-        const APP_VERSION = '3'; // CHANGE THIS NUMBER EVERY TIME YOU UPDATE THE APP
+        const APP_VERSION = '4'; // CHANGE THIS NUMBER EVERY TIME YOU UPDATE THE APP
         
         const sw = `
         const CACHE_NAME = 'soul-winner-v${APP_VERSION}';
