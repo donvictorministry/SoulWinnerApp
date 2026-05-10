@@ -7,21 +7,64 @@
 <title>The Soul Winner's App | Built by Rev. Don Victor, PhD</title>
 <meta name="description" content="The Soul Winner's App, built by a Soul Winner for Soul Winning. Features include daily reflections, interactive quizzes, and a global community to inspire and mobilize believers for the Great Commission.">
 <meta name="google-site-verification" content="z-Nf51m-3qPl-KGc_wh43HS7_En3nHPwC6n4rB2mnBI" />
-    
+  
+<link rel="icon" type="image/png"href="https://i.ibb.co/CKfcDRB5/Screenshot-20260302-192209.png/512/3426/3426653.png">
+<link rel="apple-touch-icon" href="https://i.ibb.co/CKfcDRB5/Screenshot-20260302-192209.png/512/3426/3426653.png">
+       
 <!-- Open Graph Tags -->
 <meta property="og:title" content="The Soul Winner's App - What Makes This App Special?">
 <meta property="og:description" content="Unlike other Apps, Soul Winner's App is built by a Soul Winner, for Soul Winning. Every feature is designed to equip, inspire, and mobilize believers for the Great Commission. From Daily Reflections that ignite passion, to Interactive Quizzes that build Biblical knowledge, to a Global Community that shares the same burning vision - this isn't just an app, it's a movement.">
 <meta property="og:image" content="https://i.ibb.co/RpYZhKkg/Screenshot-20260302-221213.png/og-image.jpg">
-    <meta property="og:url" content="https://soulwinnerapp.donvictoracademy.net/">
+<meta property="og:url" content="https://soulwinnerapp.donvictoracademy.net/">
 <meta property="og:type" content="website">
 
     <!-- PWA / Manifest -->
-   <link id="manifest-placeholder" rel="manifest">
-    <meta name="theme-color" content="#d4af37">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
-<style>
+ <link id="manifest-placeholder" rel="manifest">
+ <meta name="theme-color" content="#d4af37">
+ <meta name="mobile-web-app-capable" content="yes">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+ 
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "The Soul Winner App",
+      "operatingSystem": "Android, iOS, Windows",
+      "applicationCategory": "GameApplication",
+      "url": "https://soulwinnerapp.donvictoracademy.net/",
+      "description": "An interactive tool for the Great Commission, featuringstar rating, quizzes and reflections.",
+      "author": { "@id": "#ministryIdentity" },
+      "about": {
+        "@type": "Thing",
+        "name": "Evangelism / Great Commission"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "#ministryIdentity",
+      "name": "Don Victor Ministries",
+      "url": "https://www.donvictorministry.org.ng/",
+      "logo": "https://i.ibb.co/rKSxYYcc/Screenshot-20260214-190413.png/512/3426/3426653.png",
+      "founder": { "@id": "#drDonVictor" }
+    },
+    {
+      "@type": "Person",
+      "@id": "#drDonVictor",
+      "name": "Rev. Don Victor, PhD",
+      "jobTitle": "Owner & Architect",
+      "url": "https://www.donvictoracademy.net/",
+      "sameAs": [
+        "https://www.facebook.com/Rev.DonVictor"
+      ]
+    }
+  ]
+}
+</script>
+
+ <style>
         :root {
             --gold: #d4af37;
             --deep-black: #1a1a1a;
@@ -1294,214 +1337,6 @@ body.light-mode .moonIcon {
  </style>
 </head>
 <body>
-
-<style>
- /* 1. Ticker: Positioned below header */
-  #sys-ticker {
-    position: fixed; 
-    top: 90px; /* Adjust if header is taller */
-    left: 0; 
-    width: 100%; 
-    height: auto; /* ALLOWS VERTICAL GROWTH */
-    min-height: 60px; 
-    overflow: hidden; 
-    z-index: 999; 
-    display: none;
-    font-family: sans-serif; 
-    font-weight: bold; 
-    line-height: 1.4; /* Better spacing for multiple lines */
-    padding: 10px 0; /* Adds breathing room top and bottom */
-  }
-  
-  .ticker-item {
-    width: 100%; 
-    text-align: center; 
-    position: relative; /* Changed to Relative so it pushes the box open */
-    transform: translateX(100%); 
-    transition: transform 0.5s ease-in-out; 
-    white-space: normal; /* ALLOWS TEXT WRAPPING */
-    padding: 0 20px; /* Prevents text touching screen edges */
-  }
-  .ticker-active { transform: translateX(0); } 
-  .ticker-exit { transform: translateX(-100%); }
-
- 
-  /* 2. Announcement Banner - RESTORED TO YOUR EXACT CODE */
-  #sys-banner {
-    position: fixed; 
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* True centering */
-    width: 80%; 
-    max-width: 500px;
-    padding: 20px 40px 20px 20px; /* Extra right padding for close button */
-    text-align: center; 
-    cursor: pointer;
-    font-family: sans-serif; 
-    z-index: 1000; 
-    display: none;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    border-radius: 8px;
-  }
-   
-  /* Close button for banner */
-  .banner-close {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: inherit;
-    opacity: 0.7;
-    padding: 0 8px;
-    line-height: 1;
-  }
-  .banner-close:hover {
-    opacity: 1;
-  }
-
-  /* 3. Full Screen Modal */
-  #sys-modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 2000; display: none;
-    justify-content: center; align-items: center; flex-direction: column;
-  }
-  #sys-modal-content {
-    background: white; padding: 40px; border-radius: 8px; max-width: 80%;
-    text-align: center; font-size: 1.5rem;
-    overflow-y: auto; max-height: 80vh;
-  }
-  #sys-close {
-    margin-top: 20px; padding: 10px 20px; background: #333; color: #fff;
-    border: none; cursor: pointer; font-size: 1rem;
-  }
-</style>
-
-<div id="sys-ticker"></div>
-
-<div id="sys-banner">
-  <button class="banner-close">×</button>
-  <div class="banner-content"></div>
-</div>
-
-<div id="sys-modal">
-  <div id="sys-modal-content"></div>
-  <button id="sys-close">Close</button>
-</div>
-<script>
-  // 🔴 REPLACE THIS WITH YOUR GAS URL
-  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxA2YnFTkknZOIlzHmWvh0XKEU5r9lEBXSMopOT_GXskPfaMdoujp1qBu2raIlIpnD9ew/exec';
-  
- const uid = localStorage.getItem('site_uid') || Math.random().toString(36).substr(2, 9);
-  localStorage.setItem('site_uid', uid);
-
-  // Track Visit
-  fetch(ENDPOINT, {
-    method: "POST",
-    mode: "no-cors",
-    body: JSON.stringify({
-      uid: uid,
-      device: /Mobi/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
-      browser: navigator.userAgent
-    })
-  });
-
-  // Fetch & Render
-  fetch(ENDPOINT + `?uid=${uid}`)
-    .then(r => r.json())
-    .then(data => {
-      if (data.banned) {
-        document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>ACCESS DENIED</h1>";
-        return;
-      }
-      if (data.tickers && data.tickers.length > 0) initTicker(data.tickers);
-      if (data.announcements && data.announcements.length > 0) initBanner(data.announcements[0]); 
-    })
-    .catch(err => console.warn("Widget Error:", err));
-
-  // --- Ticker Logic ---
-  function initTicker(items) {
-    const container = document.getElementById('sys-ticker');
-    container.style.display = 'block';
-    let index = 0;
-    
-    function showNext() {
-      container.innerHTML = ''; 
-      const item = items[index];
-      
-      const div = document.createElement('div');
-      div.className = 'ticker-item';
-      
-      // ✅ FIX: Allow Links (innerHTML)
-      div.innerHTML = item.msg; 
-      
-      div.style.backgroundColor = item.bg;
-      div.style.color = item.color;
-      
-      container.appendChild(div);
-      
-      void div.offsetWidth; 
-      div.classList.add('ticker-active');
-
-      setTimeout(() => {
-        div.classList.remove('ticker-active');
-        div.classList.add('ticker-exit');
-        
-        index = (index + 1) % items.length;
-        setTimeout(showNext, 500); 
-      }, item.speed || 4000);
-    }
-    showNext();
-  }
-
-  // --- Banner Logic ---
-  function initBanner(data) {
-    const banner = document.getElementById('sys-banner');
-    const contentDiv = banner.querySelector('.banner-content');
-    const closeBtn = banner.querySelector('.banner-close');
-    const modal = document.getElementById('sys-modal');
-    const modalContent = document.getElementById('sys-modal-content');
-    const modalClose = document.getElementById('sys-close');
-
-    // ✅ FIX: Allow Links in Banner (innerHTML)
-    contentDiv.innerHTML = data.msg;
-    
-    banner.style.backgroundColor = data.bg;
-    banner.style.color = data.color;
-    banner.style.display = 'block';
-
-    closeBtn.onclick = (e) => {
-      e.stopPropagation(); 
-      banner.style.display = 'none';
-    };
-
-    // Open Modal logic
-    banner.onclick = (e) => {
-        // Prevent opening if the user clicked a link inside the banner
-        if (e.target.tagName === 'A') return;
-
-        // ✅ FIX: Allow Links in Modal (innerHTML)
-        modalContent.innerHTML = data.msg;
-        modalContent.style.color = "#000"; 
-        modal.style.display = 'flex';
-    };
-
-    modalClose.onclick = () => {
-      modal.style.display = 'none';
-      if(data.duration > 0) banner.style.display = 'none';
-    };
-    
-    if(data.duration > 0) {
-      setTimeout(() => {
-        banner.style.display = 'none';
-      }, data.duration * 1000); 
-    }
-  }
-</script>
-
     <!-- LOADING SCREEN -->
     <div id="loadingScreen">
         <img src="https://i.ibb.co/11SX3VD/Screenshot-20260214-182147.png" alt="Ministry Logo" class="loader-photo">
@@ -2234,40 +2069,133 @@ Please contact us immediately so we can send you resources for your spiritual gr
             apiUrl: 'https://script.google.com/macros/s/AKfycbx9zxyjvIwi2hqffB-p-OjWvyCONu7yZMQCpcfezcK2S_LK1T6tsqCCc4nwBcx20X85/exec',
             offlineMode: true
         };
- 
+        
+// ============================================
+// CUSTOM SNACKBAR ENGINE
+// ============================================
+window.showSnackbar = function(message, type = 'info') {
+    let snackbar = document.getElementById('swSnackbar');
+    if (!snackbar) {
+        snackbar = document.createElement('div');
+        snackbar.id = 'swSnackbar';
+        document.body.appendChild(snackbar);
+    }
+    
+    let bgColors = {
+        'success': '#25D366',
+        'error': '#ff4444',
+        'warning': '#ff9800',
+        'info': '#d4af37'
+    };
+    let textColors = {
+        'success': '#ffffff',
+        'error': '#ffffff',
+        'warning': '#000000',
+        'info': '#000000'
+    };
 
+    snackbar.style.cssText = `
+        position: fixed; bottom: 30px; left: 50%; transform: translate(-50%, 150px);
+        background: ${bgColors[type] || bgColors['info']};
+        color: ${textColors[type] || textColors['info']};
+        padding: 14px 24px; border-radius: 8px; font-weight: bold; font-size: 1rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 2147483647;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-align: center; max-width: 90vw; width: max-content;
+        font-family: inherit;
+    `;
+    
+    snackbar.innerHTML = message;
+    
+    if (window.snackbarTimeout) clearTimeout(window.snackbarTimeout);
+    if (window.snackbarHideTimeout) clearTimeout(window.snackbarHideTimeout);
+    
+    window.snackbarTimeout = setTimeout(() => snackbar.style.transform = 'translate(-50%, 0)', 10);
+    window.snackbarHideTimeout = setTimeout(() => snackbar.style.transform = 'translate(-50%, 150px)', 3500);
+};
+        
+// ============================================
+// INSTALL APP ENGINE
+// ============================================
 (() => {
   let installPromptEvent;
 
   window.addEventListener('beforeinstallprompt', (event) => {
+    // Prevent the default mini-infobar from appearing on mobile
     event.preventDefault();
+    // Stash the event so it can be triggered later
     installPromptEvent = event;
+
+    // 1. Check if the user previously dismissed the banner
+    if (localStorage.getItem('swBannerDismissed')) return;
+
+    // 2. Create the floating banner dynamically (ONLY fires if 1-click install is natively supported)
+    if (!document.getElementById('swInstallBanner')) {
+        const banner = document.createElement('div');
+        banner.id = 'swInstallBanner';
+        
+        // Sits fixed above the bottom area (Adjust 'bottom: 85px' if it overlaps your specific nav height)
+        banner.style.cssText = `
+            position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%);
+            background: #d4af37; color: #000000; padding: 12px 45px 12px 18px;
+            border-radius: 12px; font-weight: bold; font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 2147483647;
+            width: 90%; max-width: 400px; display: flex; align-items: center;
+            font-family: inherit; cursor: pointer; line-height: 1.4;
+            animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        `;
+        
+        banner.innerHTML = `
+            <div style="flex: 1;">Install this spiritual uplifting app for quick access and offline use</div>
+            <button id="swBannerClose" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 1.8rem; color: #000000; cursor: pointer; padding: 5px; line-height: 1;">&times;</button>
+        `;
+        
+        // Add minimal animation keyframes
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes popUp { from { transform: translate(-50%, 100px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }`;
+        document.head.appendChild(style);
+        document.body.appendChild(banner);
+
+        // 3. Handle Install Click (Tapping anywhere on the banner except the X)
+        banner.addEventListener('click', async (e) => {
+            if (e.target.id === 'swBannerClose') return; 
+            if (!installPromptEvent) return;
+            
+            installPromptEvent.prompt();
+            const { outcome } = await installPromptEvent.userChoice;
+            
+            // If they accepted, hide the banner
+            if (outcome === 'accepted') {
+                banner.remove();
+            }
+            installPromptEvent = null;
+        });
+
+        // 4. Handle Close (X) Click
+        document.getElementById('swBannerClose').addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            banner.remove();
+            localStorage.setItem('swBannerDismissed', 'true'); // Remembers choice
+        });
+    }
   });
 
+  // Keep your existing standalone install button working as well!
   const installBtn = document.getElementById('pwa-isolated-install-btn');
   if (installBtn) {
     installBtn.addEventListener('click', async () => {
-      if (!installPromptEvent) return; // Fails silently if prompt isn't ready/supported
+      if (!installPromptEvent) return; 
       installPromptEvent.prompt();
       await installPromptEvent.userChoice;
       installPromptEvent = null;
     });
   }
 })();
-
-       
+     
 (function() {
-    var IGNORE_MEMORY_TEST_MODE = false;
-
     window.SoulWinnerTerms = {
         openFromMenu: function() { buildGatekeeper(1); }
     };
-
-    if (IGNORE_MEMORY_TEST_MODE || !localStorage.getItem('soulWinnersTermsAccepted')) {
-        setTimeout(function() {
-            buildGatekeeper(0);
-        }, 10000);
-    }
 
     function buildGatekeeper(isFromMenu) {
         if (document.getElementById('swEdgeToEdge')) return;
@@ -2692,7 +2620,7 @@ async function rateStar(value) {
         // ============================================
         // SERVICE WORKER (VERSION CONTROLLED)
         // ============================================
-        const APP_VERSION = '4'; // CHANGE THIS NUMBER EVERY TIME YOU UPDATE THE APP
+        const APP_VERSION = '4'; 
         
         const sw = `
         const CACHE_NAME = 'soul-winner-v${APP_VERSION}';
@@ -2702,7 +2630,7 @@ async function rateStar(value) {
             e.waitUntil(
                 caches.open(CACHE_NAME).then(cache => {
                     return cache.addAll([
-                        '/?v=${APP_VERSION}', // Bypasses browser cache to get fresh code
+                        '/?v=${APP_VERSION}', 
                         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
                     ]);
                 })
@@ -2763,30 +2691,30 @@ async function rateStar(value) {
         // LOADING SCREEN
         // ============================================
 
-  async function loadStarRating() {
-    // Always show empty stars for new users
+  function loadStarRating() {
     currentRating = 0;
     updateStarDisplay(0);
 }
 
-    window.addEventListener('load', async () => {
-    await initIndexedDB();
-    await loadStarRating();
-    await loadDailyReflection();
-    await fetchGlobalRatings();
-    await trackUserVisit();       
-            
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
-            }, 3000);
-            
-            // Start syncing if online
-            if (isOnline) {
-                syncPendingActions();
-            }
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('loadingScreen');
+    if (loader) loader.classList.add('hidden');
+    const deferTask = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+
+    deferTask(() => {
+        initIndexedDB();
+        loadStarRating();
+        loadDailyReflection();
+        fetchGlobalRatings();
+        trackUserVisit();
         
-        // ============================================
+        if (typeof isOnline !== 'undefined' && isOnline) {
+            syncPendingActions();
+        }
+    });
+});
+
+     // ============================================
         // SLIDESHOW
         // ============================================
         let slideIndex = 0;
@@ -3066,12 +2994,16 @@ async function rateStar(value) {
             } else {
                 const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
                 const waUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+                const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+                const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
                 
-                alert('Link copied to clipboard! Opening share options...');
+                showSnackbar('Link copied to clipboard! Opening share options...', 'success');
                 window.open(fbUrl, '_blank');
                 setTimeout(() => window.open(waUrl, '_blank'), 1000);
+                setTimeout(() => window.open(xUrl, '_blank'), 2000);
+                setTimeout(() => window.open(tgUrl, '_blank'), 3000);
             }
-        }         
+        }
         
         // ============================================
         // BACKEND FUNCTIONS
@@ -3159,12 +3091,12 @@ async function rateStar(value) {
         function copyAccount() {
             const num = document.getElementById('accNum').innerText;
             navigator.clipboard.writeText(num);
-            alert('Account Number Copied!');
+            showSnackbar('Account Number Copied!', 'success');
         }
         
         function handleFeedback(type) {
             const msg = type === 'up' ? 'Praise God!' : 'We will pray for more grace.';
-            alert(msg);
+            showSnackbar(msg, 'success');
             savePref('feedback_' + Date.now(), type);
         }
         
@@ -3178,7 +3110,7 @@ async function rateStar(value) {
                 const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
                 const waUrl = `https://wa.me/?text=${encodeURIComponent('Join the Soul Winner movement: ' + url)}`;
                 
-                alert('Link copied! Opening share options...');
+                showSnackbar('Link copied! Opening share options...', 'success');
                 window.open(fbUrl, '_blank');
                 setTimeout(() => window.open(waUrl, '_blank'), 1000);
             }
@@ -3950,6 +3882,806 @@ if (splashScreen) {
       </div>
     `);
 }
+
+</script>
+
+<style>
+ /* 1. Ticker: Positioned below header */
+  #sys-ticker {
+    position: fixed; 
+    top: 90px; /* Adjust if header is taller */
+    left: 0; 
+    width: 100%; 
+    height: auto; /* ALLOWS VERTICAL GROWTH */
+    min-height: 60px; 
+    overflow: hidden; 
+    z-index: 999; 
+    display: none;
+    font-family: sans-serif; 
+    font-weight: bold; 
+    line-height: 1.4; /* Better spacing for multiple lines */
+    padding: 10px 0; /* Adds breathing room top and bottom */
+  }
+  
+  .ticker-item {
+    width: 100%; 
+    text-align: center; 
+    position: relative; /* Changed to Relative so it pushes the box open */
+    transform: translateX(100%); 
+    transition: transform 0.5s ease-in-out; 
+    white-space: normal; /* ALLOWS TEXT WRAPPING */
+    padding: 0 20px; /* Prevents text touching screen edges */
+  }
+  .ticker-active { transform: translateX(0); } 
+  .ticker-exit { transform: translateX(-100%); }
+
+ 
+  /* 2. Announcement Banner - RESTORED TO YOUR EXACT CODE */
+  #sys-banner {
+    position: fixed; 
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* True centering */
+    width: 80%; 
+    max-width: 500px;
+    padding: 20px 40px 20px 20px; /* Extra right padding for close button */
+    text-align: center; 
+    cursor: pointer;
+    font-family: sans-serif; 
+    z-index: 1000; 
+    display: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border-radius: 8px;
+  }
+   
+  /* Close button for banner */
+  .banner-close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    padding: 0 8px;
+    line-height: 1;
+  }
+  .banner-close:hover {
+    opacity: 1;
+  }
+
+  /* 3. Full Screen Modal */
+  #sys-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 2000; display: none;
+    justify-content: center; align-items: center; flex-direction: column;
+  }
+  #sys-modal-content {
+    background: white; padding: 40px; border-radius: 8px; max-width: 80%;
+    text-align: center; font-size: 1.5rem;
+    overflow-y: auto; max-height: 80vh;
+  }
+  #sys-close {
+    margin-top: 20px; padding: 10px 20px; background: #333; color: #fff;
+    border: none; cursor: pointer; font-size: 1rem;
+  }
+</style>
+
+<div id="sys-ticker"></div>
+
+<div id="sys-banner">
+  <button class="banner-close">×</button>
+  <div class="banner-content"></div>
+</div>
+
+<div id="sys-modal">
+  <div id="sys-modal-content"></div>
+  <button id="sys-close">Close</button>
+</div>
+<script>
+  // 🔴 
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxA2YnFTkknZOIlzHmWvh0XKEU5r9lEBXSMopOT_GXskPfaMdoujp1qBu2raIlIpnD9ew/exec';
+  
+ const uid = localStorage.getItem('site_uid') || Math.random().toString(36).substr(2, 9);
+  localStorage.setItem('site_uid', uid);
+
+  // Track Visit
+  fetch(ENDPOINT, {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify({
+      uid: uid,
+      device: /Mobi/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
+      browser: navigator.userAgent
+    })
+  });
+
+  // Fetch & Render
+  fetch(ENDPOINT + `?uid=${uid}`)
+    .then(r => r.json())
+    .then(data => {
+      if (data.banned) {
+        document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:20%'>ACCESS DENIED</h1>";
+        return;
+      }
+      if (data.tickers && data.tickers.length > 0) initTicker(data.tickers);
+      if (data.announcements && data.announcements.length > 0) initBanner(data.announcements[0]); 
+    })
+    .catch(err => console.warn("Widget Error:", err));
+
+  // --- Ticker Logic ---
+  function initTicker(items) {
+    const container = document.getElementById('sys-ticker');
+    container.style.display = 'block';
+    let index = 0;
+    
+    function showNext() {
+      container.innerHTML = ''; 
+      const item = items[index];
+      
+      const div = document.createElement('div');
+      div.className = 'ticker-item';
+      
+      // ✅ FIX: Allow Links (innerHTML)
+      div.innerHTML = item.msg; 
+      
+      div.style.backgroundColor = item.bg;
+      div.style.color = item.color;
+      
+      container.appendChild(div);
+      
+      void div.offsetWidth; 
+      div.classList.add('ticker-active');
+
+      setTimeout(() => {
+        div.classList.remove('ticker-active');
+        div.classList.add('ticker-exit');
+        
+        index = (index + 1) % items.length;
+        setTimeout(showNext, 500); 
+      }, item.speed || 4000);
+    }
+    showNext();
+  }
+
+  // --- Banner Logic ---
+  function initBanner(data) {
+    const banner = document.getElementById('sys-banner');
+    const contentDiv = banner.querySelector('.banner-content');
+    const closeBtn = banner.querySelector('.banner-close');
+    const modal = document.getElementById('sys-modal');
+    const modalContent = document.getElementById('sys-modal-content');
+    const modalClose = document.getElementById('sys-close');
+
+    // ✅ FIX: Allow Links in Banner (innerHTML)
+    contentDiv.innerHTML = data.msg;
+    
+    banner.style.backgroundColor = data.bg;
+    banner.style.color = data.color;
+    banner.style.display = 'block';
+
+    closeBtn.onclick = (e) => {
+      e.stopPropagation(); 
+      banner.style.display = 'none';
+    };
+
+    // Open Modal logic
+    banner.onclick = (e) => {
+        // Prevent opening if the user clicked a link inside the banner
+        if (e.target.tagName === 'A') return;
+
+        // ✅ FIX: Allow Links in Modal (innerHTML)
+        modalContent.innerHTML = data.msg;
+        modalContent.style.color = "#000"; 
+        modal.style.display = 'flex';
+    };
+
+    modalClose.onclick = () => {
+      modal.style.display = 'none';
+      if(data.duration > 0) banner.style.display = 'none';
+    };
+    
+    if(data.duration > 0) {
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, data.duration * 1000); 
+    }
+  }
+</script>
+
+  // ==============================================================================
+  //        PLUG & PLAY EDITION
+ // ==============================================================================
+<script>
+
+const SoulWinnerTelemetry = (function () {
+    'use strict';
+
+    // ============================================
+    // 1. CONFIGURATION & CONSTANTS
+    // ============================================
+    const CONFIG = {
+        GAS_ENDPOINT: 'https://script.google.com/macros/s/AKfycbxsmzPBlnbn8UJmkFnZLkS6M5_5i8aCMstlEf6Un-R_o0pNeyYC-wLbi1Xeo1649UZ8/exec',
+        DB_NAME: 'SoulWinnerTelemetryDB',
+        DB_VERSION: 1,
+        STORE_NAME: 'telemetry_queue',
+        BATCH_SIZE: 15,
+        SYNC_INTERVAL_MS: 10000, // Background sync every 10 seconds
+        API_TIMEOUT_MS: 3000,    // Cascading API timeout to prevent hanging
+        SESSION_TIMEOUT_MINUTES: 30
+    };
+
+    let cachedLocation = null;
+    let sessionStartTime = new Date().getTime();
+
+    // ============================================
+    // 2. UTILITY & IDENTITY MANAGER
+    // ============================================
+    const IdentityManager = {
+        generateUUID: function () {
+            let d = new Date().getTime();
+            let d2 = (typeof performance !== 'undefined' && performance.now && (performance.now() * 1000)) || 0;
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                let r = Math.random() * 16;
+                if (d > 0) {
+                    r = (d + r) % 16 | 0;
+                    d = Math.floor(d / 16);
+                } else {
+                    r = (d2 + r) % 16 | 0;
+                    d2 = Math.floor(d2 / 16);
+                }
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+        },
+
+        getDeviceID: function () {
+            let deviceId = localStorage.getItem('sw_device_id');
+            if (!deviceId) {
+                deviceId = 'DEV_' + this.generateUUID();
+                localStorage.setItem('sw_device_id', deviceId);
+            }
+            return deviceId;
+        },
+
+        getUserID: function () {
+            let userId = localStorage.getItem('sw_user_id');
+            if (!userId) {
+                userId = 'USR_' + this.generateUUID();
+                localStorage.setItem('sw_user_id', userId);
+            }
+            return userId;
+        },
+        getSessionID: function () {
+            const now = new Date().getTime();
+            let sessionData = JSON.parse(localStorage.getItem('sw_session') || 'null');
+
+            if (!sessionData || (now - sessionData.lastActive > (CONFIG.SESSION_TIMEOUT_MINUTES * 60 * 1000))) {
+                sessionData = {
+                    id: 'SESS_' + this.generateUUID(),
+                    created: now,
+                    lastActive: now
+                };
+            } else {
+                sessionData.lastActive = now;
+            }
+            localStorage.setItem('sw_session', JSON.stringify(sessionData));
+            return sessionData.id;
+        }
+    };
+
+    // ============================================
+    // 3. OFFLINE STORAGE MANAGER (INDEXEDDB)
+    // ============================================
+    const StorageManager = {
+        db: null,
+
+        init: function () {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(CONFIG.DB_NAME, CONFIG.DB_VERSION);
+
+                request.onupgradeneeded = function (event) {
+                    const db = event.target.result;
+                    if (!db.objectStoreNames.contains(CONFIG.STORE_NAME)) {
+                        db.createObjectStore(CONFIG.STORE_NAME, { keyPath: 'id', autoIncrement: true });
+                    }
+                };
+
+                request.onsuccess = (event) => {
+                    this.db = event.target.result;
+                    resolve();
+                };
+
+                request.onerror = (event) => {
+                    console.error('Telemetry DB Initialization Error', event.target.error);
+                    reject(event.target.error);
+                };
+            });
+        },
+        enqueue: function (payload) {
+            return new Promise((resolve, reject) => {
+                if (!this.db) return reject(new Error('Database not initialized'));
+                const transaction = this.db.transaction([CONFIG.STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(CONFIG.STORE_NAME);
+                const request = store.add(payload);
+
+                request.onsuccess = () => resolve();
+                request.onerror = (e) => reject(e.target.error);
+            });
+        },
+
+        getBatch: function () {
+            return new Promise((resolve, reject) => {
+                if (!this.db) return resolve([]);
+                const transaction = this.db.transaction([CONFIG.STORE_NAME], 'readonly');
+                const store = transaction.objectStore(CONFIG.STORE_NAME);
+                const request = store.getAll();
+
+                request.onsuccess = (event) => {
+                    const allData = event.target.result || [];
+                    resolve(allData.slice(0, CONFIG.BATCH_SIZE));
+                };
+                request.onerror = (e) => reject(e.target.error);
+            });
+        },
+
+        deleteBatch: function (ids) {
+            return new Promise((resolve, reject) => {
+                if (!this.db || ids.length === 0) return resolve();
+                const transaction = this.db.transaction([CONFIG.STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(CONFIG.STORE_NAME);
+
+                ids.forEach(id => store.delete(id));
+
+                transaction.oncomplete = () => resolve();
+                transaction.onerror = (e) => reject(e.target.error);
+            });
+        }
+    };
+
+    // ============================================
+    // 4. DEVICE & BROWSER PROFILER
+    // ============================================
+    const DeviceProfiler = {
+        getProfile: function () {
+            const ua = navigator.userAgent;
+            const referrer = document.referrer || '';
+            const url = window.location.href;
+
+            // Advanced OS Detection
+            let os = 'Unknown';
+            if (ua.indexOf('Win') !== -1) os = 'Windows';
+            if (ua.indexOf('Mac') !== -1) os = 'MacOS';
+            if (ua.indexOf('X11') !== -1) os = 'UNIX';
+            if (ua.indexOf('Linux') !== -1) os = 'Linux';
+            if (/Android/.test(ua)) os = 'Android';
+            if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
+
+            // Social & Traffic Source Parsing
+            const isFacebook = ua.includes('FBAN') || ua.includes('FBAV') || referrer.includes('facebook.com');
+            const isWhatsApp = ua.includes('WhatsApp') || referrer.includes('wa.me');
+            const isTwitter = ua.includes('Twitter') || referrer.includes('t.co');
+            const isLinkedIn = ua.includes('LinkedIn') || referrer.includes('linkedin.com');
+            const isBlogger = referrer.includes('blogspot.com') || referrer.includes('blogger.com');
+            const isGoogle = referrer.includes('google.com') || referrer.includes('android-app://com.google.android.googlequicksearchbox');
+
+            // Browser Identification
+            const isChrome = ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR');
+            const isSafari = ua.includes('Safari') && !ua.includes('Chrome');
+            const isBrave = (navigator.brave && navigator.brave.isBrave) ? true : false;
+
+            // Network Parsing
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            const connectionType = connection ? connection.effectiveType : 'Unknown';
+
+            return {
+                UserAgent: ua,
+                ReferrerHeader: referrer,
+                RequestURL: url,
+                ScreenResolution: `${window.screen.width || 0}x${window.screen.height || 0}`,
+                DeviceOS: os,
+                ConnectionType: connectionType,
+                Facebook: isFacebook ? 'Yes' : 'No',
+                WhatsApp: isWhatsApp ? 'Yes' : 'No',
+                Twitter: isTwitter ? 'Yes' : 'No',
+                LinkedIn: isLinkedIn ? 'Yes' : 'No',
+                Blogger: isBlogger ? 'Yes' : 'No',
+                Google: isGoogle ? 'Yes' : 'No',
+                Chrome: isChrome ? 'Yes' : 'No',
+                Safari: isSafari ? 'Yes' : 'No',
+                Brave: isBrave ? 'Yes' : 'No'
+            };
+        }
+    };
+
+    // ============================================
+    // 5. CASCADING GEOLOCATION ENGINE
+    // ============================================
+    const GeoLocator = {
+        fetchWithTimeout: function (url, options = {}) {
+            return Promise.race([
+                fetch(url, options),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), CONFIG.API_TIMEOUT_MS))
+            ]);
+        },
+        getLocation: async function () {
+            if (cachedLocation) return cachedLocation;
+
+            const fallbackLoc = { Country: 'Unknown', City: 'Unknown', ISP: 'Unknown', MobileNetwork: 'Unknown' };
+
+            const apis = [
+                {
+                    url: 'https://ipapi.co/json/',
+                    parse: (data) => ({ Country: data.country_name, City: data.city, ISP: data.org, MobileNetwork: data.org })
+                },
+                {
+                    url: 'https://ipwho.is/',
+                    parse: (data) => ({ Country: data.country, City: data.city, ISP: data.connection.isp, MobileNetwork: data.connection.isp })
+                },
+                {
+                    url: 'https://ipinfo.io/json',
+                    parse: (data) => ({ Country: data.country, City: data.city, ISP: data.org, MobileNetwork: data.org })
+                },
+                {
+                    url: 'https://freeipapi.com/api/json',
+                    parse: (data) => ({ Country: data.countryName, City: data.cityName, ISP: 'Unknown', MobileNetwork: 'Unknown' })
+                },
+                {
+                    url: 'https://api.bigdatacloud.net/data/client-info',
+                    parse: (data) => ({ Country: data.countryName, City: data.city, ISP: 'Unknown', MobileNetwork: 'Unknown' })
+                }
+            ];
+
+            for (const api of apis) {
+                try {
+                    const response = await this.fetchWithTimeout(api.url);
+                    if (!response.ok) continue;
+                    const data = await response.json();
+                    
+                    const parsed = api.parse(data);
+                    if (parsed.Country && parsed.Country !== 'Unknown') {
+                        cachedLocation = parsed;
+                        return cachedLocation;
+                    }
+                } catch (error) {
+                    // Fail silently and cascade to the next fallback API layer
+                    continue;
+                }
+            }
+
+            return fallbackLoc;
+        }
+    };
+
+    // ============================================
+    // 6. PERFORMANCE & CRASH MONITORS
+    // ============================================
+    const Monitor = {
+        getPerformanceMetrics: function () {
+            let loadTimeMs = 0;
+            let networkLatencyMs = 0;
+
+            if (window.performance && window.performance.timing) {
+                const t = window.performance.timing;
+                loadTimeMs = t.loadEventEnd > 0 ? (t.loadEventEnd - t.navigationStart) : (new Date().getTime() - t.navigationStart);
+                networkLatencyMs = t.responseEnd - t.requestStart;
+            }
+
+            return {
+                LoadTimeMs: loadTimeMs > 0 ? loadTimeMs : 0,
+                NetworkLatencyMs: networkLatencyMs > 0 ? networkLatencyMs : 0,
+                OfflineFlag: !navigator.onLine ? 'Yes' : 'No'
+            };
+        },
+
+        initCrashHandler: function () {
+            window.addEventListener('error', (event) => {
+                TelemetryEngine.logCrash({
+                    CrashType: 'JavaScript Error',
+                    CrashMessage: event.message,
+                    StackTrace: event.error ? event.error.stack : 'N/A',
+                    ThreadName: 'Main'
+                });
+            });
+
+            window.addEventListener('unhandledrejection', (event) => {
+                TelemetryEngine.logCrash({
+                    CrashType: 'Unhandled Promise Rejection',
+                    CrashMessage: event.reason ? event.reason.toString() : 'Unknown Reason',
+                    StackTrace: event.reason && event.reason.stack ? event.reason.stack : 'N/A',
+                    ThreadName: 'Async'
+                });
+            });
+        }
+    };
+
+    // ============================================
+    // 7. PLUG-AND-PLAY AUTO-TRACKER ENGINE
+    // ============================================
+    const AutoTracker = {
+        init: function() {
+            this.bindClickTracking();
+            this.bindFormTracking();
+            this.bindVisibilityTracking();
+            this.bindRouteTracking();
+        },
+        
+        bindClickTracking: function() {
+            document.body.addEventListener('click', (e) => {
+                const target = e.target.closest('button, a, [role="button"], input[type="submit"], input[type="button"], .clickable');
+                if (!target) return; // Ignore clicks on blank space or static text
+
+                // Attempt to extract the most meaningful text identifier
+                let textId = target.innerText || target.value || target.getAttribute('aria-label') || target.id || target.className || 'Unknown_Element';
+                textId = textId.replace(/[\n\r]+/g, ' ').substring(0, 50).trim();
+
+                let eventType = 'Click_Button';
+                if (target.tagName.toLowerCase() === 'a') eventType = 'Click_Link';
+                
+                // Track automatically
+                TelemetryEngine.logInteraction(eventType, textId, 0, 'AutoTracker_DOM');
+            }, { passive: true });
+        },
+
+        bindFormTracking: function() {
+            document.body.addEventListener('submit', (e) => {
+                const form = e.target;
+                const formId = form.id || form.name || form.className || 'Unnamed_Form';
+                
+                TelemetryEngine.logInteraction('Form_Submit', formId, 0, 'AutoTracker_DOM');
+            }, { passive: true });
+        },
+
+        bindVisibilityTracking: function() {
+            window.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'hidden') {
+                    const timeSpentMs = new Date().getTime() - sessionStartTime;
+                    TelemetryEngine.logAnalytics('Session_Hidden', timeSpentMs);
+                } else if (document.visibilityState === 'visible') {
+                    // Reset timer when they return to the tab
+                    sessionStartTime = new Date().getTime();
+                }
+            });
+
+            // Catch final exit
+            window.addEventListener('beforeunload', () => {
+                const timeSpentMs = new Date().getTime() - sessionStartTime;
+                TelemetryEngine.logAnalytics('Session_Exit', timeSpentMs);
+            });
+        },
+
+        bindRouteTracking: function() {
+            let lastUrl = location.href;
+            
+            const trackView = () => {
+                const currentUrl = location.href;
+                if (currentUrl !== lastUrl) {
+                    TelemetryEngine.logInteraction('Virtual_Page_View', currentUrl.substring(0, 100), 0, 'AutoTracker_Router');
+                    lastUrl = currentUrl;
+                }
+            };
+
+            // Intercept standard popstate (back/forward buttons)
+            window.addEventListener('popstate', trackView);
+
+            // Intercept pushState/replaceState
+            const originalPushState = history.pushState;
+            history.pushState = function() {
+                originalPushState.apply(this, arguments);
+                trackView();
+            };
+
+            const originalReplaceState = history.replaceState;
+            history.replaceState = function() {
+                originalReplaceState.apply(this, arguments);
+                trackView();
+            };
+        }
+    };
+
+    // ============================================
+    // 8. CORE  ENGINE
+    // ============================================
+    const TelemetryEngine = {
+        buildCorePayload: async function (specificData) {
+            const loc = await GeoLocator.getLocation();
+            
+            const core = {
+                Timestamp: new Date().toISOString(),
+                UserID: IdentityManager.getUserID(),
+                Country: loc.Country,
+                City: loc.City,
+                ISP: loc.ISP,
+                MobileNetwork: loc.MobileNetwork
+            };
+
+            return Object.assign({}, core, specificData);
+        },
+
+        queueEvent: async function (actionName, payload) {
+            try {
+                const fullPayload = await this.buildCorePayload(payload);
+                await StorageManager.enqueue({
+                    action: actionName,
+                    data: fullPayload
+                });
+            } catch (error) {
+                console.error('Failed to queue telemetry event:', error);
+            }
+        },
+        // --- SPECIFIC SCHEMA LOGGERS ---
+        logTraffic: function () {
+            const profile = DeviceProfiler.getProfile();
+            profile.DeviceID = IdentityManager.getDeviceID();
+            this.queueEvent('log_traffic', profile);
+        },
+
+        logInteraction: function (eventType, detail, payloadSize = 0, destination = 'Local') {
+            this.queueEvent('log_interaction', {
+                SessionID: IdentityManager.getSessionID(),
+                EventType: eventType,
+                Share: eventType.includes('Share') ? 'Yes' : 'No',
+                EventDetail: detail,
+                InteractionDurationMs: 0,
+                PayloadSize: payloadSize,
+                StatusCode: '200',
+                RetryCount: 0,
+                DestinationPlatform: destination
+            });
+        },
+
+        logAnalytics: function (actionTaken, timeSpentMs = 0) {
+            const perf = Monitor.getPerformanceMetrics();
+            const profile = DeviceProfiler.getProfile();
+
+            this.queueEvent('log_analytics', {
+                UserAgent: profile.UserAgent,
+                VisitedDate: new Date().toISOString().split('T')[0],
+                TimeSpent: timeSpentMs,
+                ActionTaken: actionTaken,
+                SessionID: IdentityManager.getSessionID(),
+                PageDepth: window.history.length,
+                BounceFlag: timeSpentMs < 5000 && timeSpentMs > 0 ? 'Yes' : 'No',
+                EntryPage: profile.RequestURL,
+                ExitPage: profile.RequestURL,
+                LoadTimeMs: perf.LoadTimeMs,
+                NetworkLatencyMs: perf.NetworkLatencyMs,
+                OfflineFlag: perf.OfflineFlag
+            });
+        },
+
+        logCrash: function (crashData) {
+            const profile = DeviceProfiler.getProfile();
+            const memory = (performance && performance.memory) ? Math.round(performance.memory.usedJSHeapSize / 1048576) : 0;
+            
+            const payload = Object.assign({
+                CrashID: 'CRSH_' + IdentityManager.generateUUID(),
+                DeviceID: IdentityManager.getDeviceID(),
+                DeviceOS: profile.DeviceOS,
+                OSVersion: 'Unknown',
+                AppVersion: '1.0',
+                MemoryUsageMB: memory,
+                BatteryLevel: 'Unknown', 
+                ScreenOrientation: (window.screen && window.screen.orientation) ? window.screen.orientation.type : 'Unknown'
+            }, crashData);
+
+            this.queueEvent('log_crash', payload);
+        }
+    };
+
+    // ============================================
+    // 9. NETWORK DISPATCHER (BACKGROUND SYNC)
+    // ============================================
+    const Dispatcher = {
+        isSyncing: false,
+        sync: async function () {
+            if (this.isSyncing || !navigator.onLine) return;
+            
+            try {
+                this.isSyncing = true;
+                const batch = await StorageManager.getBatch();
+                
+                if (batch.length === 0) {
+                    this.isSyncing = false;
+                    return;
+                }
+
+                // Group by backend action handler to maximize batch operation efficiency
+                const actionGroups = {};
+                batch.forEach(item => {
+                    if (!actionGroups[item.action]) actionGroups[item.action] = [];
+                    actionGroups[item.action].push({ id: item.id, data: item.data });
+                });
+
+                const successfulIds = [];
+
+                // Dispatch requests synchronously per group
+                for (const ObjectEntry of Object.entries(actionGroups)) {
+                    const action = ObjectEntry[0];
+                    const items = ObjectEntry[1];
+                    const payloadData = items.map(i => i.data);
+                    
+                    await fetch(CONFIG.GAS_ENDPOINT, {
+                        method: 'POST',
+                        mode: 'no-cors', // Fundamental for bypassing Google Apps Script preflight strictness
+                        headers: {
+                            'Content-Type': 'text/plain'
+                        },
+                        body: JSON.stringify({
+                            action: action,
+                            data: payloadData
+                        })
+                    });
+
+                    // Due to opaque no-cors responses, we assume safe transit if network layer didn't throw
+                    successfulIds.push(...items.map(i => i.id));
+                }
+
+                if (successfulIds.length > 0) {
+                    await StorageManager.deleteBatch(successfulIds);
+                }
+
+            } catch (error) {
+                console.error('Telemetry Synchronization Failure:', error);
+            } finally {
+                this.isSyncing = false;
+            }
+        },
+
+        startDaemon: function () {
+            setInterval(() => this.sync(), CONFIG.SYNC_INTERVAL_MS);
+            window.addEventListener('online', () => this.sync());
+        }
+    };
+
+    // ============================================
+    // 10. PUBLIC API & BOOTSTRAP INITIALIZATION
+    // ============================================
+    return {
+        init: async function () {
+            if (CONFIG.GAS_ENDPOINT === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                console.warn("SoulWinner Telemetry: Missing GAS Endpoint URL configuration.");
+                return; // Graceful halt if unconfigured
+            }
+
+            try {
+                // Initialize Offline DB and Global Monitors
+                await StorageManager.init();
+                Monitor.initCrashHandler();
+                
+                // Initialize Plug-and-Play Auto-Tracking DOM Hooks
+                AutoTracker.init();
+
+                // Start Background Dispatcher Daemon
+                Dispatcher.startDaemon();
+
+                // Fire initial foundational logs
+                window.addEventListener('load', () => {
+                    // Slight delay to prevent blocking the main UI render thread
+                    setTimeout(() => {
+                        TelemetryEngine.logTraffic();
+                        TelemetryEngine.logAnalytics('Initial_PageLoad');
+                    }, 2000);
+                });
+
+            } catch (e) {
+                console.error("Telemetry Initialization Architecture Failed:", e);
+            }
+        },
+
+        trackInteraction: function (eventType, detail) {
+            TelemetryEngine.logInteraction(eventType, detail, 0, 'Manual_Trigger');
+        },
+        trackShare: function (platform, detail) {
+            TelemetryEngine.logInteraction('Explicit_Share', detail, 0, platform);
+        }
+    };
+
+})();
+
+SoulWinnerTelemetry.init();
 
 </script>
 </body>
