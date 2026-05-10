@@ -2137,7 +2137,7 @@ window.showSnackbar = function(message, type = 'info') {
         // Sits fixed above the bottom area (Adjust 'bottom: 85px' if it overlaps your specific nav height)
         banner.style.cssText = `
             position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%);
-            background: #d4af37; color: #000000; padding: 12px 45px 12px 18px;
+            background: #d4af37; color: #000000; padding: 12px 18px 12px 18px;
             border-radius: 12px; font-weight: bold; font-size: 0.95rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 2147483647;
             width: 90%; max-width: 400px; display: flex; align-items: center;
@@ -2146,8 +2146,7 @@ window.showSnackbar = function(message, type = 'info') {
         `;
         
         banner.innerHTML = `
-            <div style="flex: 1;">Tab to Install this Uplifting App for quick access</div>
-            <button id="swBannerClose" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: transparent; border: none; font-size: 1.8rem; color: #000000; cursor: pointer; padding: 5px; line-height: 1;">&times;</button>
+            <div style="flex: 1;">Install this spiritual uplifting app for quick access and offline use</div>
         `;
         
         // Add minimal animation keyframes
@@ -2158,7 +2157,6 @@ window.showSnackbar = function(message, type = 'info') {
 
         // 3. Handle Install Click (Tapping anywhere on the banner except the X)
         banner.addEventListener('click', async (e) => {
-            if (e.target.id === 'swBannerClose') return; 
             if (!installPromptEvent) return;
             
             installPromptEvent.prompt();
@@ -2169,13 +2167,6 @@ window.showSnackbar = function(message, type = 'info') {
                 banner.remove();
             }
             installPromptEvent = null;
-        });
-
-        // 4. Handle Close (X) Click
-        document.getElementById('swBannerClose').addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            banner.remove();
-            localStorage.setItem('swBannerDismissed', 'true'); // Remembers choice
         });
     }
   });
@@ -2191,7 +2182,7 @@ window.showSnackbar = function(message, type = 'info') {
     });
   }
 })();
-     
+         
 (function() {
     window.SoulWinnerTerms = {
         openFromMenu: function() { buildGatekeeper(1); }
